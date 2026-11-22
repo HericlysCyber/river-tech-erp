@@ -1,0 +1,400 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  }
+
+:root {
+--azul: #0b5ed7;
+--azul-escuro: #073b8f;
+--laranja: #f28c28;
+--texto: #172033;
+--cinza: #667085;
+--borda: #dfe4ec;
+--fundo: #f4f7fb;
+--branco: #ffffff;
+}
+
+body {
+font-family: Arial, Helvetica, sans-serif;
+background: var(--fundo);
+color: var(--texto);
+min-height: 100vh;
+}
+
+.pdv-login-page {
+min-height: 100vh;
+
+display: flex;
+align-items: center;
+justify-content: center;
+
+padding: 24px;
+
+background:
+    radial-gradient(
+        circle at top left,
+        rgba(11, 94, 215, 0.12),
+        transparent 35%
+    ),
+    radial-gradient(
+        circle at bottom right,
+        rgba(242, 140, 40, 0.10),
+        transparent 35%
+    ),
+    var(--fundo);
+
+}
+
+.pdv-login-card {
+width: 100%;
+max-width: 430px;
+
+background: var(--branco);
+
+border: 1px solid rgba(0, 0, 0, 0.05);
+
+border-radius: 22px;
+
+padding: 38px;
+
+box-shadow:
+    0 24px 70px rgba(16, 24, 40, 0.10);
+
+}
+
+.pdv-brand {
+display: flex;
+align-items: center;
+gap: 13px;
+
+margin-bottom: 36px;
+
+}
+
+.pdv-logo {
+width: 48px;
+height: 48px;
+
+display: flex;
+align-items: center;
+justify-content: center;
+
+border-radius: 14px;
+
+background: linear-gradient(
+    135deg,
+    var(--azul),
+    var(--azul-escuro)
+);
+
+color: white;
+
+font-size: 25px;
+font-weight: 800;
+
+box-shadow:
+    0 8px 20px rgba(11, 94, 215, 0.25);
+
+}
+
+.pdv-brand strong {
+display: block;
+
+font-size: 17px;
+letter-spacing: 1.4px;
+
+}
+
+.pdv-brand span {
+display: block;
+
+margin-top: 3px;
+
+color: var(--laranja);
+
+font-size: 12px;
+font-weight: 800;
+
+letter-spacing: 2px;
+
+}
+
+.pdv-title {
+margin-bottom: 28px;
+}
+
+.pdv-label {
+color: var(--azul);
+
+font-size: 11px;
+font-weight: 800;
+
+letter-spacing: 1.5px;
+
+}
+
+.pdv-title h1 {
+margin-top: 7px;
+
+font-size: 30px;
+line-height: 1.15;
+
+}
+
+.pdv-title p {
+margin-top: 10px;
+
+color: var(--cinza);
+
+font-size: 14px;
+line-height: 1.5;
+
+}
+
+.pdv-field {
+margin-bottom: 19px;
+}
+
+.pdv-field label {
+display: block;
+
+margin-bottom: 8px;
+
+font-size: 13px;
+font-weight: 700;
+
+}
+
+.pdv-field input {
+width: 100%;
+
+height: 50px;
+
+border: 1px solid var(--borda);
+
+border-radius: 11px;
+
+padding: 0 14px;
+
+outline: none;
+
+font-size: 14px;
+
+color: var(--texto);
+
+background: #fff;
+
+transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+
+}
+
+.pdv-field input:focus {
+border-color: var(--azul);
+
+box-shadow:
+    0 0 0 4px rgba(11, 94, 215, 0.10);
+
+}
+
+.password-wrapper {
+position: relative;
+}
+
+.password-wrapper input {
+padding-right: 48px;
+}
+
+#btnMostrarSenha {
+position: absolute;
+
+right: 10px;
+top: 50%;
+
+transform: translateY(-50%);
+
+width: 34px;
+height: 34px;
+
+border: none;
+
+background: transparent;
+
+color: #667085;
+
+cursor: pointer;
+
+border-radius: 8px;
+
+}
+
+#btnMostrarSenha:hover {
+background: #f2f4f7;
+}
+
+.pdv-button {
+width: 100%;
+
+height: 52px;
+
+border: none;
+
+border-radius: 11px;
+
+background: linear-gradient(
+    135deg,
+    var(--azul),
+    var(--azul-escuro)
+);
+
+color: white;
+
+font-size: 15px;
+font-weight: 800;
+
+cursor: pointer;
+
+transition:
+    transform 0.15s,
+    box-shadow 0.15s,
+    opacity 0.15s;
+
+}
+
+.pdv-button:hover {
+transform: translateY(-1px);
+
+box-shadow:
+    0 10px 25px rgba(11, 94, 215, 0.22);
+
+}
+
+.pdv-button:disabled {
+opacity: 0.65;
+
+cursor: wait;
+
+transform: none;
+
+box-shadow: none;
+
+}
+
+.pdv-message {
+margin-bottom: 16px;
+
+padding: 12px 14px;
+
+border-radius: 10px;
+
+font-size: 13px;
+
+line-height: 1.4;
+
+background: #fff3f3;
+
+color: #b42318;
+
+border: 1px solid #ffd5d2;
+
+}
+
+.pdv-footer {
+display: flex;
+justify-content: center;
+gap: 5px;
+
+margin-top: 28px;
+padding-top: 22px;
+
+border-top: 1px solid #edf0f4;
+
+color: #98a2b3;
+
+font-size: 11px;
+
+}
+
+.pdv-footer strong {
+color: #667085;
+}
+
+@media (max-width: 520px) {
+
+.pdv-login-page {
+    padding: 16px;
+}
+
+.pdv-login-card {
+    padding: 28px 22px;
+    border-radius: 18px;
+}
+
+.pdv-title h1 {
+    font-size: 26px;
+}
+
+}
+
+/* CORREÇÃO DEFINITIVA — ÁREA DE PAGAMENTO DO PDV */
+
+.venda-carrinho {
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 0 !important;
+}
+
+.carrinho-resumo {
+    display: flex !important;
+    flex-direction: column !important;
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    overflow: hidden !important;
+}
+
+#areaFormaPagamento {
+    flex: 1 1 0 !important;
+    min-height: 0 !important;
+    overflow-y: auto !important;
+    overscroll-behavior: contain;
+}
+
+.carrinho-resumo .total-venda {
+    flex-shrink: 0 !important;
+}
+
+.carrinho-resumo .btn-finalizar-venda {
+    display: block !important;
+    flex-shrink: 0 !important;
+    width: 100% !important;
+    min-height: 46px !important;
+    position: relative !important;
+    margin-bottom: 4px !important;
+}
+
+/* Ajuste para telas menores */
+@media (max-width: 850px) {
+    .venda-layout {
+        grid-template-rows: minmax(280px, 1fr) minmax(260px, 45vh) !important;
+        height: 100% !important;
+        min-height: 0 !important;
+        overflow: hidden !important;
+    }
+
+    .venda-carrinho {
+        height: auto !important;
+        min-height: 0 !important;
+        overflow: hidden !important;
+    }
+
+    .carrinho-resumo {
+        padding: 8px 12px !important;
+    }
+}
+
+
+/* Logo River Tech no acesso do PDV */
+.pdv-logo { overflow: hidden; background: #fff; flex: 0 0 48px; }
+.pdv-logo img { width: 100%; height: 100%; object-fit: contain; display: block; padding: 2px; }

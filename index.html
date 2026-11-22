@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>River Tech ERP</title>
+
+    <link rel="stylesheet" href="css/login.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase.js"></script>
+    <script src="js/login.js" defer></script>
+<link rel="icon" type="image/png" href="assets/logo.png"></head>
+
+<body>
+
+    <main class="login-page">
+
+        <section class="login-card">
+
+            <div class="brand">
+
+                <div class="brand-icon">
+                    <img src="assets/logo.png" alt="River Tech" onerror="this.style.display='none';this.parentElement.textContent='R';">
+                </div>
+
+                <div>
+                    <strong>RIVER TECH</strong>
+                    <span>ERP</span>
+                </div>
+
+            </div>
+
+            <div class="login-header">
+
+                <span class="eyebrow">
+                    SISTEMA DE GESTÃO
+                </span>
+
+                <h1>
+                    Bem-vindo
+                </h1>
+
+                <p>
+                    Acesse o seu ambiente de gestão empresarial.
+                </p>
+
+            </div>
+
+            <form id="loginForm">
+
+                <div class="field">
+
+                    <label for="email">
+                        E-mail
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="seu@email.com"
+                        autocomplete="email"
+                        required
+                    >
+
+                </div>
+
+                <div class="field">
+
+                    <label for="password">
+                        Senha
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Digite sua senha"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                </div>
+
+                <button
+                    type="submit"
+                    id="loginButton"
+                >
+                    Entrar
+                </button>
+
+                <div
+                    id="loginMessage"
+                    class="login-message"
+                ></div>
+
+            </form>
+
+            <footer>
+                © 2026 River Tech Todos os direitos reservados
+            </footer>
+
+        </section>
+
+    </main>
+
+</body>
+
+</html>

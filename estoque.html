@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Estoque | River Tech ERP</title>
+
+    <link rel="stylesheet" href="css/estoque.css">
+
+<link rel="icon" type="image/png" href="assets/logo.png"></head>
+
+<body>
+
+    <div class="erp-layout">
+
+        <!-- =====================================================
+             SIDEBAR
+             ===================================================== -->
+
+        <aside class="sidebar">
+
+            <div class="sidebar-brand">
+
+                <div class="brand-logo">
+
+                    <img
+                        src="assets/logo.png"
+                        alt="River Tech">
+
+                </div>
+
+                <div class="brand-info">
+
+                    <strong>River Tech</strong>
+
+                    <span>ERP</span>
+
+                </div>
+
+            </div>
+
+
+            <nav class="sidebar-menu">
+
+                <button
+                    class="menu-item"
+                    data-module="dashboard">
+
+                    <span class="menu-icon">⌂</span>
+
+                    <span>Dashboard</span>
+
+                </button>
+
+
+                <button
+                    class="menu-item"
+                    data-module="pdv">
+
+                    <span class="menu-icon">▣</span>
+
+                    <span>PDV</span>
+
+                </button>
+
+
+                <button
+                    class="menu-item"
+                    data-module="produtos">
+
+                    <span class="menu-icon">▤</span>
+
+                    <span>Produtos</span>
+
+                </button>
+
+
+                <button
+                    class="menu-item active"
+                    data-module="estoque">
+
+                    <span class="menu-icon">▥</span>
+
+                    <span>Estoque</span>
+
+                </button>
+
+                <button class="menu-item" data-module="etiquetas">
+                    <span class="menu-icon">▧</span>
+                    <span>Etiquetas</span>
+                </button>
+
+
+                <button
+                    class="menu-item"
+                    data-module="clientes">
+
+                    <span class="menu-icon">♙</span>
+
+                    <span>Clientes</span>
+
+                </button>
+
+
+                <button
+                    class="menu-item"
+                    data-module="financeiro">
+
+                    <span class="menu-icon">R$</span>
+
+                    <span>Financeiro</span>
+
+                </button>
+
+
+                <button
+                    class="menu-item"
+                    data-module="relatorios">
+
+                    <span class="menu-icon">▦</span>
+
+                    <span>Relatórios</span>
+
+                </button>
+
+
+                <button
+                    class="menu-item"
+                    data-module="configuracoes">
+
+                    <span class="menu-icon">⚙</span>
+
+                    <span>Configurações</span>
+
+                </button>
+
+            </nav>
+
+
+            <div class="sidebar-footer">
+
+                <span>© 2026 River Tech</span>
+
+            </div>
+
+        </aside>
+
+
+        <!-- =====================================================
+             CONTEÚDO
+             ===================================================== -->
+
+        <main class="main-content">
+
+
+            <!-- HEADER -->
+
+            <header class="topbar">
+
+                <div>
+
+                    <span class="page-kicker">
+                        GESTÃO
+                    </span>
+
+                    <h1>
+                        Estoque
+                    </h1>
+
+                    <p>
+                        Controle produtos, quantidades e movimentações.
+                    </p>
+
+                </div>
+
+
+                <div class="topbar-company">
+
+                    <div
+                        class="company-logo"
+                        id="companyLogo">
+
+                        R
+
+                    </div>
+
+                    <div>
+
+                        <strong id="companyName">
+                            Carregando...
+                        </strong>
+
+                        <span>
+                            ERP
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <!-- =================================================
+                 INDICADORES
+                 ================================================= -->
+
+            <section class="stock-stats">
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon blue">
+                        📦
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Produtos
+                        </span>
+
+                        <strong id="statProdutos">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon green">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Estoque normal
+                        </span>
+
+                        <strong id="statNormal">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon orange">
+                        !
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Estoque baixo
+                        </span>
+
+                        <strong id="statBaixo">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon red">
+                        ×
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Sem estoque
+                        </span>
+
+                        <strong id="statZerado">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+            </section>
+
+
+            <!-- =================================================
+                 FERRAMENTAS
+                 ================================================= -->
+
+            <section class="content-card">
+
+
+                <div class="card-header">
+
+                    <div>
+
+                        <span class="section-kicker">
+                            INVENTÁRIO
+                        </span>
+
+                        <h2>
+                            Estoque atual
+                        </h2>
+
+                    </div>
+
+
+                    <button
+                        class="btn-primary"
+                        id="btnNovaMovimentacao">
+
+                        + Movimentar estoque
+
+                    </button>
+
+                </div>
+
+
+                <div class="filters">
+
+
+                    <div class="search-box">
+
+                        <span>⌕</span>
+
+                        <input
+                            type="text"
+                            id="campoBusca"
+                            placeholder="Buscar produto por nome ou código...">
+
+                    </div>
+
+
+                    <select id="filtroSituacao">
+
+                        <option value="TODOS">
+                            Todos
+                        </option>
+
+                        <option value="NORMAL">
+                            Estoque normal
+                        </option>
+
+                        <option value="BAIXO">
+                            Estoque baixo
+                        </option>
+
+                        <option value="ZERADO">
+                            Sem estoque
+                        </option>
+
+                    </select>
+
+
+                    <button
+                        class="btn-secondary"
+                        id="btnAtualizar">
+
+                        ↻ Atualizar
+
+                    </button>
+
+                </div>
+
+
+                <!-- =================================================
+                     TABELA
+                     ================================================= -->
+
+                <div class="table-wrapper">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Produto
+                                </th>
+
+                                <th>
+                                    Código
+                                </th>
+
+                                <th>
+                                    Unidade
+                                </th>
+
+                                <th>
+                                    Estoque atual
+                                </th>
+
+                                <th>
+                                    Estoque mínimo
+                                </th>
+
+                                <th>
+                                    Situação
+                                </th>
+
+                                <th>
+                                    Atualizado
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="tabelaEstoque">
+
+                        </tbody>
+
+                    </table>
+
+
+                    <div
+                        class="table-state"
+                        id="estadoTabela">
+
+                        <div class="loading-spinner"></div>
+
+                        <span>
+                            Carregando estoque...
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 MOVIMENTAÇÕES
+                 ================================================= -->
+
+            <section class="content-card movements-card">
+
+                <div class="card-header">
+
+                    <div>
+
+                        <span class="section-kicker">
+                            HISTÓRICO
+                        </span>
+
+                        <h2>
+                            Últimas movimentações
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <div class="table-wrapper">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Data
+                                </th>
+
+                                <th>
+                                    Produto
+                                </th>
+
+                                <th>
+                                    Tipo
+                                </th>
+
+                                <th>
+                                    Quantidade
+                                </th>
+
+                                <th>
+                                    Observação
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="tabelaMovimentacoes">
+
+                        </tbody>
+
+                    </table>
+
+
+                    <div
+                        class="table-state small-state"
+                        id="estadoMovimentacoes">
+
+                        Carregando movimentações...
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+        </main>
+
+    </div>
+
+
+    <!-- =========================================================
+         MODAL MOVIMENTAÇÃO
+         ========================================================= -->
+
+    <div
+        class="modal-overlay"
+        id="modalMovimentacao">
+
+        <div class="modal">
+
+
+            <div class="modal-header">
+
+                <div>
+
+                    <span class="section-kicker">
+                        ESTOQUE
+                    </span>
+
+                    <h2>
+                        Movimentar estoque
+                    </h2>
+
+                </div>
+
+                <button
+                    class="btn-close"
+                    id="btnFecharModal">
+
+                    ×
+
+                </button>
+
+            </div>
+
+
+            <form id="formMovimentacao">
+
+
+                <div class="field">
+
+                    <label>
+                        Produto
+                    </label>
+
+                    <select
+                        id="movProduto"
+                        required>
+
+                        <option value="">
+                            Selecione um produto
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        Tipo de movimentação
+                    </label>
+
+                    <select
+                        id="movTipo"
+                        required>
+
+                        <option value="ENTRADA">
+                            Entrada
+                        </option>
+
+                        <option value="SAIDA">
+                            Saída
+                        </option>
+
+                        <option value="AJUSTE">
+                            Ajuste de estoque
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div
+                    class="field"
+                    id="campoQuantidade">
+
+                    <label id="labelQuantidade">
+                        Quantidade
+                    </label>
+
+                    <input
+                        type="number"
+                        id="movQuantidade"
+                        min="0.01"
+                        step="0.01"
+                        required>
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        Observação
+                    </label>
+
+                    <textarea
+                        id="movObservacao"
+                        rows="3"
+                        placeholder="Ex.: Compra de mercadoria, inventário, perda..."></textarea>
+
+                </div>
+
+
+                <div
+                    class="modal-error"
+                    id="modalErro">
+                </div>
+
+
+                <div class="modal-actions">
+
+                    <button
+                        type="button"
+                        class="btn-secondary"
+                        id="btnCancelarModal">
+
+                        Cancelar
+
+                    </button>
+
+
+                    <button
+                        type="submit"
+                        class="btn-primary">
+
+                        Confirmar movimentação
+
+                    </button>
+
+                </div>
+
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+     SUPABASE
+     ===================================================== -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+></script>
+
+<script src="js/supabase.js"></script>
+
+<script src="js/estoque.js"></script>
+
+</body>
+</html>

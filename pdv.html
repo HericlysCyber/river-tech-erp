@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>PDV | River Tech ERP</title>
+
+    <link
+        rel="stylesheet"
+        href="css/pdv.css"
+    >
+
+<link rel="icon" type="image/png" href="assets/logo.png"></head>
+
+<body>
+
+<!-- =====================================================
+     SIDEBAR
+     ===================================================== -->
+
+<aside class="sidebar">
+
+    <div class="brand">
+
+        <img
+            src="assets/logo.png"
+            alt="River Tech"
+        >
+
+        <div class="brand-text">
+
+            <strong>RIVER TECH</strong>
+
+            <span>ERP</span>
+
+        </div>
+
+    </div>
+
+
+    <!-- EMPRESA -->
+
+    <div class="company-mini">
+
+        <div class="company-mini-logo">
+
+            <img
+                id="companyMiniLogo"
+                src="assets/logo.png"
+                alt="Logo da empresa"
+            >
+
+        </div>
+
+        <div class="company-mini-info">
+
+            <strong id="companyMiniName">
+                Empresa
+            </strong>
+
+            <span id="companyMiniStatus">
+                Empresa ativa
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <!-- MENU -->
+
+    <nav class="menu">
+
+        <div class="menu-section">
+
+            <span class="menu-title">
+                PRINCIPAL
+            </span>
+
+            <a
+                href="dashboard.html"
+                class="menu-item"
+            >
+                <span class="menu-icon">⌂</span>
+                <span>Dashboard</span>
+            </a>
+
+        </div>
+
+
+        <div class="menu-section">
+
+            <span class="menu-title">
+                GESTÃO
+            </span>
+
+            <a
+                href="pdv.html"
+                class="menu-item active"
+            >
+                <span class="menu-icon">▣</span>
+                <span>PDV</span>
+            </a>
+
+            <a
+                href="#"
+                class="menu-item disabled"
+            >
+                <span class="menu-icon">▤</span>
+                <span>Produtos</span>
+            </a>
+
+            <a
+                href="#"
+                class="menu-item disabled"
+            >
+                <span class="menu-icon">▥</span>
+                <span>Estoque</span>
+            </a>
+
+            <a
+                href="#"
+                class="menu-item disabled"
+            >
+                <span class="menu-icon">♙</span>
+                <span>Clientes</span>
+            </a>
+
+            <a
+                href="#"
+                class="menu-item disabled"
+            >
+                <span class="menu-icon">R$</span>
+                <span>Financeiro</span>
+            </a>
+
+            <a
+                href="#"
+                class="menu-item disabled"
+            >
+                <span class="menu-icon">▦</span>
+                <span>Relatórios</span>
+            </a>
+
+        </div>
+
+
+        <div class="menu-section">
+
+            <span class="menu-title">
+                ADMINISTRAÇÃO
+            </span>
+
+            <a
+                href="#"
+                class="menu-item disabled"
+            >
+                <span class="menu-icon">⚙</span>
+                <span>Configurações</span>
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- USUÁRIO -->
+
+    <div class="sidebar-user">
+
+        <div class="user-avatar">
+
+            <span id="userInitial">
+                A
+            </span>
+
+        </div>
+
+        <div class="user-info">
+
+            <strong id="userName">
+                Administrador
+            </strong>
+
+            <span>
+                Administrador ERP
+            </span>
+
+        </div>
+
+        <button
+            type="button"
+            id="logoutButton"
+            class="logout-button"
+            title="Sair"
+        >
+            ↪
+        </button>
+
+    </div>
+
+</aside>
+
+
+<!-- =====================================================
+     CONTEÚDO PRINCIPAL
+     ===================================================== -->
+
+<main class="main-content">
+
+
+    <!-- TOPBAR -->
+
+    <header class="topbar">
+
+        <div>
+
+            <span class="topbar-section">
+                GESTÃO
+            </span>
+
+            <h1>
+                PDV
+            </h1>
+
+        </div>
+
+        <div class="topbar-status">
+
+            <span class="status-dot"></span>
+
+            <span>
+                Sistema online
+            </span>
+
+        </div>
+
+    </header>
+
+
+    <!-- CONTEÚDO -->
+
+    <section class="content">
+
+
+        <!-- CABEÇALHO -->
+
+        <div class="page-header">
+
+            <div>
+
+                <span class="page-kicker">
+                    PONTOS DE VENDA
+                </span>
+
+                <h2>
+                    Gerencie os terminais da sua empresa
+                </h2>
+
+                <p>
+                    Cadastre, acompanhe e gerencie os PDVs
+                    autorizados para sua empresa.
+                </p>
+
+            </div>
+
+            <button
+                type="button"
+                id="newPdvButton"
+                class="primary-button"
+            >
+                <span>＋</span>
+                Novo PDV
+            </button>
+
+        </div>
+
+
+        <!-- =================================================
+             RESUMO
+             ================================================= -->
+
+        <div class="summary-grid">
+
+            <div class="summary-card">
+
+                <div class="summary-icon">
+                    ▣
+                </div>
+
+                <div>
+
+                    <span>
+                        Total de PDVs
+                    </span>
+
+                    <strong id="totalPdvs">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="summary-icon">
+                    ✓
+                </div>
+
+                <div>
+
+                    <span>
+                        PDVs ativos
+                    </span>
+
+                    <strong id="activePdvs">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="summary-icon">
+                    #
+                </div>
+
+                <div>
+
+                    <span>
+                        Limite contratado
+                    </span>
+
+                    <strong id="pdvLimit">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="summary-icon">
+                    %
+                </div>
+
+                <div>
+
+                    <span>
+                        Utilização
+                    </span>
+
+                    <strong id="pdvUsage">
+                        0%
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             LIMITE
+             ================================================= -->
+
+        <div class="limit-panel">
+
+            <div class="limit-header">
+
+                <div>
+
+                    <span class="limit-kicker">
+                        LIMITE DE PDVs
+                    </span>
+
+                    <h3 id="limitText">
+                        Carregando limite...
+                    </h3>
+
+                </div>
+
+                <span
+                    id="limitBadge"
+                    class="limit-badge"
+                >
+                    Carregando
+                </span>
+
+            </div>
+
+
+            <div class="limit-progress">
+
+                <div
+                    id="limitProgress"
+                    class="limit-progress-bar"
+                    style="width: 0%;"
+                ></div>
+
+            </div>
+
+
+            <p id="limitMessage">
+                Verificando utilização dos PDVs...
+            </p>
+
+        </div>
+
+
+        <!-- =================================================
+             PAINEL DE PDVS
+             ================================================= -->
+
+        <div class="panel">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <span class="panel-kicker">
+                        TERMINAIS
+                    </span>
+
+                    <h3>
+                        Seus PDVs
+                    </h3>
+
+                </div>
+
+
+                <div class="panel-actions">
+
+                    <div class="search-box">
+
+                        <span>
+                            ⌕
+                        </span>
+
+                        <input
+                            type="text"
+                            id="searchPdv"
+                            placeholder="Buscar PDV..."
+                            autocomplete="off"
+                        >
+
+                    </div>
+
+
+                    <select
+                        id="filterPdv"
+                        class="filter-select"
+                    >
+
+                        <option value="todos">
+                            Todos
+                        </option>
+
+                        <option value="ativos">
+                            Ativos
+                        </option>
+
+                        <option value="bloqueados">
+                            Bloqueados
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <!-- LOADING -->
+
+            <div
+                id="loadingPdv"
+                class="loading-state"
+            >
+
+                <div class="loading-spinner"></div>
+
+                <p>
+                    Carregando PDVs...
+                </p>
+
+            </div>
+
+
+            <!-- TABELA -->
+
+            <div
+                id="pdvTableContainer"
+                class="table-container"
+                style="display: none;"
+            >
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                PDV
+                            </th>
+
+                            <th>
+                                Código
+                            </th>
+
+                            <th>
+                                Equipamento
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Último acesso
+                            </th>
+
+                            <th class="actions-column">
+                                Ações
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="pdvTableBody"></tbody>
+
+                </table>
+
+            </div>
+
+
+            <!-- VAZIO -->
+
+            <div
+                id="emptyState"
+                class="empty-state"
+                style="display: none;"
+            >
+
+                <div class="empty-icon">
+                    ▣
+                </div>
+
+                <h3>
+                    Nenhum PDV cadastrado
+                </h3>
+
+                <p>
+                    Cadastre o primeiro terminal da sua empresa
+                    para começar.
+                </p>
+
+                <button
+                    type="button"
+                    id="emptyNewButton"
+                    class="primary-button"
+                >
+                    ＋ Cadastrar primeiro PDV
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer class="footer">
+
+        © 2026 River Tech Todos os direitos reservados
+
+    </footer>
+
+</main>
+
+
+<!-- =====================================================
+     MODAL — NOVO PDV
+     ===================================================== -->
+
+<div
+    id="pdvModal"
+    class="modal-overlay"
+    style="display: none;"
+>
+
+    <div class="modal">
+
+        <div class="modal-header">
+
+            <div>
+
+                <span class="modal-kicker">
+                    NOVO TERMINAL
+                </span>
+
+                <h2>
+                    Cadastrar PDV
+                </h2>
+
+                <p>
+                    Cadastre um novo ponto de venda
+                    para sua empresa.
+                </p>
+
+            </div>
+
+            <button
+                type="button"
+                id="closeModal"
+                class="modal-close"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <form id="pdvForm">
+
+            <div class="form-grid">
+
+                <div class="field">
+
+                    <label for="pdvNome">
+                        Nome do PDV
+                    </label>
+
+                    <input
+                        type="text"
+                        id="pdvNome"
+                        placeholder="Ex.: Caixa 01"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label for="pdvCodigo">
+                        Código
+                    </label>
+
+                    <input
+                        type="text"
+                        id="pdvCodigo"
+                        placeholder="Ex.: PDV01"
+                        maxlength="30"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="field full">
+
+                    <label for="pdvEquipamento">
+                        Identificador do equipamento
+                    </label>
+
+                    <input
+                        type="text"
+                        id="pdvEquipamento"
+                        placeholder="Opcional"
+                    >
+
+                    <small>
+                        Pode ser utilizado futuramente para
+                        vincular o terminal ao equipamento.
+                    </small>
+
+                </div>
+
+
+                <div class="field full">
+
+                    <label for="pdvDescricao">
+                        Descrição
+                    </label>
+
+                    <textarea
+                        id="pdvDescricao"
+                        rows="4"
+                        placeholder="Observações sobre este PDV..."
+                    ></textarea>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="formMessage"
+                class="form-message"
+                style="display: none;"
+            ></div>
+
+
+            <div class="modal-footer">
+
+                <button
+                    type="button"
+                    id="cancelModal"
+                    class="secondary-button"
+                >
+                    Cancelar
+                </button>
+
+                <button
+                    type="submit"
+                    id="savePdv"
+                    class="primary-button"
+                >
+                    Cadastrar PDV
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     MODAL — GERENCIAR PDV
+     ===================================================== -->
+
+<div
+    id="pdvDetailsModal"
+    class="modal-overlay pdv-details-modal"
+    style="display: none;"
+>
+
+    <div class="modal details-modal">
+
+
+        <div class="modal-header">
+
+            <div>
+
+                <span class="modal-kicker">
+                    GERENCIAMENTO
+                </span>
+
+                <h2 id="detailsPdvName">
+                    PDV
+                </h2>
+
+                <p id="detailsPdvCode">
+                    Código
+                </p>
+
+            </div>
+
+            <button
+                type="button"
+                id="closeDetailsModal"
+                class="modal-close"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="pdv-details-body">
+
+
+            <!-- IDENTIFICAÇÃO -->
+
+            <div class="pdv-details-top">
+
+                <div class="pdv-details-icon">
+                    ▣
+                </div>
+
+                <div>
+
+                    <strong id="detailsPdvTitle">
+                        PDV
+                    </strong>
+
+                    <span id="detailsPdvStatus">
+                        Ativo
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- STATUS -->
+
+            <div
+                id="detailsStatusBox"
+                class="details-status-box"
+            >
+
+                <div>
+
+                    <span class="details-label">
+                        STATUS DO TERMINAL
+                    </span>
+
+                    <strong id="detailsStatusText">
+                        PDV ativo
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- INFORMAÇÕES -->
+
+            <div class="details-grid">
+
+
+                <div class="details-item">
+
+                    <span>
+                        Código
+                    </span>
+
+                    <strong id="detailsCode">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="details-item">
+
+                    <span>
+                        Equipamento
+                    </span>
+
+                    <strong id="detailsEquipment">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="details-item">
+
+                    <span>
+                        Criado em
+                    </span>
+
+                    <strong id="detailsCreated">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="details-item">
+
+                    <span>
+                        Último acesso
+                    </span>
+
+                    <strong id="detailsLastAccess">
+                        Nunca acessado
+                    </strong>
+
+                </div>
+
+
+                <div class="details-item full">
+
+                    <span>
+                        Descrição
+                    </span>
+
+                    <strong id="detailsDescription">
+                        —
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 ACESSO DO PDV
+                 ================================================= -->
+
+            <div class="details-status-box">
+
+                <div>
+
+                    <span class="details-label">
+                        ACESSO DO PDV
+                    </span>
+
+                    <strong id="pdvAccessStatus">
+                        Verificando acesso...
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- FORMULÁRIO DE ACESSO -->
+
+            <div
+                id="pdvAccessForm"
+                class="form-grid"
+                style="margin-top: 18px;"
+            >
+
+                <div class="field full">
+
+                    <label for="pdvAccessNome">
+                        Nome do usuário
+                    </label>
+
+                    <input
+                        type="text"
+                        id="pdvAccessNome"
+                        placeholder="Ex.: Operador Caixa 01"
+                        autocomplete="off"
+                    >
+
+                </div>
+
+
+                <div class="field full">
+
+                    <label for="pdvAccessEmail">
+                        E-mail de acesso
+                    </label>
+
+                    <input
+                        type="email"
+                        id="pdvAccessEmail"
+                        placeholder="usuario@empresa.com"
+                        autocomplete="off"
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label for="pdvAccessSenha">
+                        Senha inicial
+                    </label>
+
+                    <input
+                        type="password"
+                        id="pdvAccessSenha"
+                        placeholder="Mínimo 6 caracteres"
+                        minlength="6"
+                        autocomplete="new-password"
+                    >
+
+                </div>
+
+
+                <div
+                    class="field"
+                    style="display:flex;align-items:flex-end;"
+                >
+
+                    <button
+                        type="button"
+                        id="createPdvAccessButton"
+                        class="primary-button"
+                        style="width:100%;"
+                    >
+                        Criar acesso
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- ACESSO CADASTRADO -->
+
+            <div
+                id="pdvAccessInfo"
+                class="details-grid"
+                style="display:none;margin-top:18px;"
+            >
+
+                <div class="details-item">
+
+                    <span>
+                        Usuário
+                    </span>
+
+                    <strong id="pdvAccessUserName">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="details-item">
+
+                    <span>
+                        E-mail
+                    </span>
+
+                    <strong id="pdvAccessUserEmail">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="details-item">
+
+                    <span>
+                        Tipo de acesso
+                    </span>
+
+                    <strong>
+                        PDV
+                    </strong>
+
+                </div>
+
+
+                <div class="details-item">
+
+                    <span>
+                        Situação
+                    </span>
+
+                    <strong id="pdvAccessUserStatus">
+                        Ativo
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="detailsMessage"
+                class="details-message"
+                style="display: none;"
+            ></div>
+
+
+            <!-- AÇÕES -->
+
+            <div class="details-actions">
+
+                <button
+                    type="button"
+                    id="togglePdvButton"
+                    class="danger-button"
+                >
+                    Bloquear PDV
+                </button>
+
+                <button
+                    type="button"
+                    id="closeDetailsButton"
+                    class="secondary-button"
+                >
+                    Fechar
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     SCRIPTS
+     ===================================================== -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+></script>
+
+<script src="js/supabase.js"></script>
+
+<script
+    src="js/pdv.js"
+    defer
+></script>
+
+</body>
+
+</html>

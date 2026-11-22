@@ -1,0 +1,32 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Etiquetas | River Tech ERP</title><link rel="stylesheet" href="css/modulos-comerciais.css"><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="js/supabase.js"></script><script src="js/erp-contexto.js"></script><script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js" defer></script><script src="js/etiquetas.js" defer></script><link rel="icon" type="image/png" href="assets/logo.png"></head><body><main class="module-page"><header class="module-topbar"><div class="module-brand"><img src="assets/logo.png" alt="River Tech"><div><small>RIVER TECH ERP</small><h1>Etiquetas</h1><p data-empresa-nome>Carregando empresa...</p></div></div><div class="module-actions"><a class="btn btn-secondary" href="dashboard.html">← Voltar ao ERP</a></div></header><nav class="module-nav" aria-label="Navegação dos módulos"><span class="module-nav-label">COMERCIAL</span><a href="compras.html">Compras</a><a href="precificacao.html">Precificação</a><a href="ofertas.html">Ofertas</a><span class="module-nav-divider" aria-hidden="true"></span><a class="module-nav-standalone" href="etiquetas.html">Etiquetas</a><a class="module-nav-standalone" href="relatorios.html">Relatórios</a><a class="module-nav-standalone" href="clientes.html">Clientes</a></nav>
+<section class="panel filters-panel"><h2>Selecionar produtos para imprimir</h2><div class="filters"><div class="field wide"><label for="buscaEtiqueta">Produto, código ou código de barras</label><input id="buscaEtiqueta" placeholder="Digite ou leia o código de barras"></div><div class="field"><label for="produtoEtiqueta">Produto</label><select id="produtoEtiqueta"><option value="">Carregando produtos...</option></select></div><div class="field"><label for="qtdEtiqueta">Quantidade de etiquetas</label><input id="qtdEtiqueta" type="number" min="1" max="500" value="1"></div></div><div class="form-actions" style="margin-top:13px"><button class="btn btn-primary" id="adicionarEtiqueta">Adicionar à impressão</button><button class="btn btn-secondary" id="atualizarEtiquetas">Atualizar produtos/preços</button><button class="btn btn-secondary" id="limparEtiquetas">Limpar seleção</button><button class="btn btn-primary" id="imprimirEtiquetas">Imprimir etiquetas</button></div><div class="label-settings no-print" id="impressaoTermicaEtiquetas" style="margin-top:16px">
+<h3>Impressão térmica direta (Windows)</h3>
+<p class="muted">Use esta opção para impressoras térmicas de etiquetas em rolo. A impressão A4 pelo navegador continua disponível acima.</p>
+<div class="filters">
+<div class="field"><label for="impressoraEtiqueta">Impressora instalada no Windows</label><select id="impressoraEtiqueta"><option value="">Clique em detectar impressoras</option></select></div>
+<div class="field"><label for="protocoloEtiqueta">Linguagem da impressora</label><select id="protocoloEtiqueta"><option value="TSPL">TSPL</option><option value="ZPL">ZPL</option></select></div>
+<div class="field"><label for="densidadeEtiqueta">Resolução</label><select id="densidadeEtiqueta"><option value="203">203 dpi (padrão)</option><option value="300">300 dpi</option></select></div>
+</div>
+<div class="form-actions"><button class="btn btn-secondary" id="detectarImpressorasEtiqueta" type="button">Detectar impressoras</button><button class="btn btn-primary" id="imprimirTermicaEtiqueta" type="button">Enviar para impressora térmica</button></div>
+<p class="muted">A comunicação direta requer o River Tech Print Bridge aberto no Windows. TSPL/ZPL devem corresponder ao modelo real da impressora. Ainda será necessário validar a impressão física.</p>
+</div>
+<div class="label-settings no-print" id="configEtiquetas">
+<h3>Configuração das etiquetas</h3>
+<div class="filters">
+<div class="field"><label for="modeloEtiqueta">Modelo de impressão</label><select id="modeloEtiqueta"><option value="a4">Folha A4</option><option value="80">Bobina térmica 80 mm</option><option value="58">Bobina térmica 58 mm</option><option value="custom">Tamanho personalizado</option></select></div>
+<div class="field"><label for="larguraEtiqueta">Largura (mm)</label><input id="larguraEtiqueta" type="number" min="20" max="210" value="63"></div>
+<div class="field"><label for="alturaEtiqueta">Altura (mm)</label><input id="alturaEtiqueta" type="number" min="15" max="297" value="35"></div>
+<div class="field"><label for="colunasEtiqueta">Colunas na folha</label><input id="colunasEtiqueta" type="number" min="1" max="6" value="3"></div>
+<div class="field"><label for="espacoEtiqueta">Espaçamento (mm)</label><input id="espacoEtiqueta" type="number" min="0" max="20" step="0.5" value="3"></div>
+</div>
+<div class="label-options">
+<label><input type="checkbox" id="mostrarNome" checked> Nome do produto</label>
+<label><input type="checkbox" id="mostrarPreco" checked> Preço</label>
+<label><input type="checkbox" id="mostrarCodigo" checked> Código de barras</label>
+<label><input type="checkbox" id="mostrarLoja" checked> Nome/logo da loja</label>
+<label><input type="checkbox" id="mostrarData"> Data de emissão</label>
+</div>
+<div class="form-actions"><button class="btn btn-secondary" id="salvarConfigEtiqueta" type="button">Salvar preferências</button><button class="btn btn-secondary" id="restaurarConfigEtiqueta" type="button">Restaurar padrão</button></div>
+</div><div id="msgEtiqueta" class="message" hidden></div><p class="muted" style="margin-top:10px">A impressão não altera preços nem gera carga no PDV. Confira o tamanho de papel/etiqueta na janela de impressão da impressora.</p></section>
+<section class="panel"><h2>Pré-visualização de impressão</h2><div id="previewEtiquetas" class="label-grid"><div class="empty">Selecione um produto para visualizar as etiquetas.</div></div></section>
+<footer class="module-footer">© 2026 River Tech Todos os direitos reservados</footer></main></body></html>

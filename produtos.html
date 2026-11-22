@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Produtos | River Tech ERP</title>
+
+    <link
+        rel="stylesheet"
+        href="css/produtos.css"
+    >
+
+<link rel="icon" type="image/png" href="assets/logo.png"></head>
+
+
+<body>
+
+    <!-- =====================================================
+         SIDEBAR
+         ===================================================== -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-brand">
+
+            <div class="brand-logo">
+                <img src="assets/logo.png" alt="Logo River Tech">
+            </div>
+
+            <div>
+
+                <strong>River Tech</strong>
+
+                <span>ERP</span>
+
+            </div>
+
+        </div>
+
+
+        <nav class="sidebar-menu">
+
+            <button
+                type="button"
+                data-module="dashboard"
+            >
+                <span class="menu-icon">⌂</span>
+                <span>Dashboard</span>
+            </button>
+
+
+            <button
+                type="button"
+                data-module="pdv"
+            >
+                <span class="menu-icon">▣</span>
+                <span>PDV</span>
+            </button>
+
+
+            <button
+                type="button"
+                class="active"
+                data-module="produtos"
+            >
+                <span class="menu-icon">▤</span>
+                <span>Produtos</span>
+            </button>
+
+
+            <button
+                type="button"
+                data-module="estoque"
+            >
+                <span class="menu-icon">▥</span>
+                <span>Estoque</span>
+            </button>
+
+                <button class="menu-item" data-module="etiquetas">
+                    <span class="menu-icon">▧</span>
+                    <span>Etiquetas</span>
+                </button>
+
+
+            <button
+                type="button"
+                data-module="clientes"
+            >
+                <span class="menu-icon">♙</span>
+                <span>Clientes</span>
+            </button>
+
+
+            <button
+                type="button"
+                data-module="financeiro"
+            >
+                <span class="menu-icon">R$</span>
+                <span>Financeiro</span>
+            </button>
+
+
+            <button
+                type="button"
+                data-module="relatorios"
+            >
+                <span class="menu-icon">▥</span>
+                <span>Relatórios</span>
+            </button>
+
+
+            <button
+                type="button"
+                data-module="configuracoes"
+            >
+                <span class="menu-icon">⚙</span>
+                <span>Configurações</span>
+            </button>
+
+        </nav>
+
+
+        <div class="sidebar-footer">
+
+            <div class="footer-status">
+
+                <span class="status-dot"></span>
+
+                Sistema online
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         CONTEÚDO
+         ===================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- =================================================
+             HEADER
+             ================================================= -->
+
+        <header class="topbar">
+
+            <div>
+
+                <span class="page-kicker">
+                    CADASTRO
+                </span>
+
+                <h1>
+                    Produtos
+                </h1>
+
+                <p>
+                    Gerencie os produtos comercializados pela sua empresa.
+                </p>
+
+            </div>
+
+
+            <div class="topbar-right">
+
+                <div class="company-identity">
+
+                    <div
+                        class="company-logo"
+                        id="companyLogo"
+                    >
+                        R
+                    </div>
+
+                    <div>
+
+                        <strong id="companyName">
+                            Empresa
+                        </strong>
+
+                        <span>
+                            ERP
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="logout-button"
+                    id="logoutButton"
+                >
+                    Sair
+                </button>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =================================================
+             RESUMO
+             ================================================= -->
+
+        <section class="summary-grid">
+
+            <div class="summary-card">
+
+                <div class="summary-icon">
+                    ▤
+                </div>
+
+                <div>
+
+                    <span>
+                        Produtos cadastrados
+                    </span>
+
+                    <strong id="totalProdutos">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="summary-icon">
+                    ✓
+                </div>
+
+                <div>
+
+                    <span>
+                        Produtos ativos
+                    </span>
+
+                    <strong id="totalAtivos">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="summary-icon">
+                    ⊕
+                </div>
+
+                <div>
+
+                    <span>
+                        Categorias
+                    </span>
+
+                    <strong id="totalCategorias">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             AÇÕES
+             ================================================= -->
+
+        <section class="action-bar">
+
+            <div class="search-box">
+
+                <span class="search-icon">
+                    ⌕
+                </span>
+
+                <input
+                    type="search"
+                    id="campoBusca"
+                    placeholder="Buscar produto, código ou código de barras..."
+                    autocomplete="off"
+                >
+
+            </div>
+
+
+            <select
+                id="filtroCategoria"
+                class="select-control"
+            >
+
+                <option value="">
+                    Todas as categorias
+                </option>
+
+            </select>
+
+
+            <select
+                id="filtroStatus"
+                class="select-control"
+            >
+
+                <option value="todos">
+                    Todos os status
+                </option>
+
+                <option value="ativos">
+                    Ativos
+                </option>
+
+                <option value="inativos">
+                    Inativos
+                </option>
+
+            </select>
+
+
+            <button
+                type="button"
+                class="primary-button"
+                id="novoProdutoButton"
+            >
+                <span>+</span>
+                Novo produto
+            </button>
+
+        </section>
+
+
+
+        <!-- =================================================
+             TABELA
+             ================================================= -->
+
+        <section class="products-card">
+
+            <div class="section-header">
+
+                <div>
+
+                    <span class="section-kicker">
+                        CATÁLOGO
+                    </span>
+
+                    <h2>
+                        Produtos cadastrados
+                    </h2>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="secondary-button"
+                    id="gerenciarCategoriasButton"
+                >
+                    Categorias
+                </button>
+
+            </div>
+
+
+            <div
+                class="loading-state"
+                id="loadingState"
+            >
+
+                <div class="loading-spinner"></div>
+
+                <span>
+                    Carregando produtos...
+                </span>
+
+            </div>
+
+
+            <div
+                class="table-wrapper"
+                id="tableWrapper"
+                hidden
+            >
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Produto
+                            </th>
+
+                            <th>
+                                Código
+                            </th>
+
+                            <th>
+                                Categoria
+                            </th>
+
+                            <th>
+                                Unidade
+                            </th>
+
+                            <th>
+                                Preço venda
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Ações
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="produtosTabela">
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+            <div
+                class="empty-state"
+                id="emptyState"
+                hidden
+            >
+
+                <div class="empty-icon">
+                    ▤
+                </div>
+
+                <h3>
+                    Nenhum produto encontrado
+                </h3>
+
+                <p>
+                    Cadastre seu primeiro produto para começar a utilizar o catálogo.
+                </p>
+
+                <button
+                    type="button"
+                    class="primary-button"
+                    id="emptyNovoProdutoButton"
+                >
+                    + Cadastrar produto
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =====================================================
+         MODAL PRODUTO
+         ===================================================== -->
+
+    <div
+        class="modal-overlay"
+        id="produtoModal"
+        hidden
+    >
+
+        <div class="modal">
+
+            <div class="modal-header">
+
+                <div>
+
+                    <span class="section-kicker">
+                        PRODUTO
+                    </span>
+
+                    <h2 id="produtoModalTitulo">
+                        Novo produto
+                    </h2>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="modal-close"
+                    id="fecharProdutoModal"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <form id="produtoForm">
+
+                <input
+                    type="hidden"
+                    id="produtoId"
+                >
+
+
+                <div class="form-section">
+
+                    <div class="form-section-title">
+                        Informações do produto
+                    </div>
+
+
+                    <div class="form-grid">
+
+                        <div class="field field-full">
+
+                            <label for="produtoNome">
+                                Nome *
+                            </label>
+
+                            <input
+                                type="text"
+                                id="produtoNome"
+                                maxlength="150"
+                                required
+                                placeholder="Ex.: Coca-Cola 2L"
+                            >
+
+                        </div>
+
+
+                        <div class="field">
+
+                            <label for="produtoCodigo">
+                                Código
+                            </label>
+
+                            <input
+                                type="text"
+                                id="produtoCodigo"
+                                maxlength="50"
+                                placeholder="Código interno"
+                            >
+
+                        </div>
+
+
+                        <div class="field">
+
+                            <label for="produtoCodigoBarras">
+                                Código de barras
+                            </label>
+
+                            <input
+                                type="text"
+                                id="produtoCodigoBarras"
+                                maxlength="50"
+                                placeholder="EAN / GTIN"
+                            >
+
+                        </div>
+
+
+                        <div class="field">
+
+                            <label for="produtoCategoria">
+                                Categoria
+                            </label>
+
+                            <select id="produtoCategoria">
+
+                                <option value="">
+                                    Sem categoria
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="field">
+
+                            <label for="produtoUnidade">
+                                Unidade *
+                            </label>
+
+                            <select id="produtoUnidade">
+
+                                <option value="UN">
+                                    UN - Unidade
+                                </option>
+
+                                <option value="KG">
+                                    KG - Quilograma
+                                </option>
+
+                                <option value="G">
+                                    G - Grama
+                                </option>
+
+                                <option value="L">
+                                    L - Litro
+                                </option>
+
+                                <option value="ML">
+                                    ML - Mililitro
+                                </option>
+
+                                <option value="CX">
+                                    CX - Caixa
+                                </option>
+
+                                <option value="PC">
+                                    PC - Pacote
+                                </option>
+
+                                <option value="FD">
+                                    FD - Fardo
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="field field-full">
+
+                            <label for="produtoDescricao">
+                                Descrição
+                            </label>
+
+                            <textarea
+                                id="produtoDescricao"
+                                rows="3"
+                                maxlength="500"
+                                placeholder="Descrição opcional"
+                            ></textarea>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="form-section">
+
+                    <div class="form-section-title">
+                        Valores
+                    </div>
+
+
+                    <div class="form-grid">
+
+                        <div class="field">
+
+                            <label for="produtoPrecoCusto">
+                                Preço de custo
+                            </label>
+
+                            <input
+                                type="number"
+                                id="produtoPrecoCusto"
+                                min="0"
+                                step="0.01"
+                                value="0"
+                            >
+
+                        </div>
+
+
+                        <div class="field">
+
+                            <label for="produtoPrecoVenda">
+                                Preço de venda *
+                            </label>
+
+                            <input
+                                type="number"
+                                id="produtoPrecoVenda"
+                                min="0"
+                                step="0.01"
+                                value="0"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="form-section">
+
+                    <div class="form-section-title">
+                        Controle de estoque
+                    </div>
+
+
+                    <div class="form-grid">
+
+                        <div class="field">
+
+                            <label for="produtoEstoqueMinimo">
+                                Estoque mínimo
+                            </label>
+
+                            <input
+                                type="number"
+                                id="produtoEstoqueMinimo"
+                                min="0"
+                                step="0.001"
+                                value="0"
+                            >
+
+                        </div>
+
+
+                        <div class="field">
+
+                            <label for="produtoEstoqueMaximo">
+                                Estoque máximo
+                            </label>
+
+                            <input
+                                type="number"
+                                id="produtoEstoqueMaximo"
+                                min="0"
+                                step="0.001"
+                                placeholder="Opcional"
+                            >
+
+                        </div>
+
+
+                        <div
+                            class="field"
+                            id="estoqueInicialField"
+                        >
+
+                            <label for="produtoEstoqueInicial">
+                                Estoque inicial
+                            </label>
+
+                            <input
+                                type="number"
+                                id="produtoEstoqueInicial"
+                                min="0"
+                                step="0.001"
+                                value="0"
+                            >
+
+                            <small>
+                                Será registrado como entrada inicial no estoque.
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <div
+                    class="form-section"
+                    id="statusProdutoSection"
+                    hidden
+                >
+
+                    <div class="field-checkbox">
+
+                        <label>
+
+                            <input
+                                type="checkbox"
+                                id="produtoAtivo"
+                                checked
+                            >
+
+                            <span>
+                                Produto ativo
+                            </span>
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+
+                <div
+                    class="form-message"
+                    id="formMessage"
+                    hidden
+                ></div>
+
+
+
+                <div class="modal-footer">
+
+                    <button
+                        type="button"
+                        class="secondary-button"
+                        id="cancelarProdutoButton"
+                    >
+                        Cancelar
+                    </button>
+
+
+                    <button
+                        type="submit"
+                        class="primary-button"
+                        id="salvarProdutoButton"
+                    >
+                        Salvar produto
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         MODAL CATEGORIAS
+         ===================================================== -->
+
+    <div
+        class="modal-overlay"
+        id="categoriasModal"
+        hidden
+    >
+
+        <div class="modal modal-small">
+
+            <div class="modal-header">
+
+                <div>
+
+                    <span class="section-kicker">
+                        ORGANIZAÇÃO
+                    </span>
+
+                    <h2>
+                        Categorias
+                    </h2>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="modal-close"
+                    id="fecharCategoriasModal"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <div class="category-create">
+
+                <input
+                    type="text"
+                    id="novaCategoriaNome"
+                    maxlength="100"
+                    placeholder="Nome da nova categoria"
+                >
+
+                <button
+                    type="button"
+                    class="primary-button"
+                    id="criarCategoriaButton"
+                >
+                    Adicionar
+                </button>
+
+            </div>
+
+
+            <div
+                class="category-list"
+                id="categoriaLista"
+            ></div>
+
+
+            <div
+                class="form-message"
+                id="categoriaMessage"
+                hidden
+            ></div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         TOAST
+         ===================================================== -->
+
+    <div
+        class="toast"
+        id="toast"
+    ></div>
+
+
+    <!-- =====================================================
+         SUPABASE
+         ===================================================== -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+    ></script>
+
+    <script src="js/supabase.js"></script>
+
+    <script src="js/produtos.js"></script>
+
+</body>
+
+</html>

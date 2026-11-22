@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Histórico de Vendas | River Tech ERP</title>
+
+    <link rel="stylesheet" href="css/historicos.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase.js"></script>
+    <script src="js/historico-vendas.js" defer></script>
+<link rel="icon" type="image/png" href="assets/logo.png"></head>
+
+<body>
+    <div class="history-layout">
+
+        <header class="history-topbar">
+            <a class="brand" href="dashboard.html">
+                <img src="assets/logo.png" alt="River Tech"
+                     onerror="this.style.display='none'">
+                <span>
+                    <strong>RIVER TECH</strong>
+                    <small>ERP</small>
+                </span>
+            </a>
+
+            <div class="topbar-actions">
+                <span class="company-pill" id="companyName">
+                    Carregando empresa...
+                </span>
+
+                <button class="btn btn-light" id="backButton" type="button">
+                    ← Dashboard
+                </button>
+            </div>
+        </header>
+
+        <main class="history-main">
+
+            <section class="page-heading">
+                <div>
+                    <span class="eyebrow">GESTÃO COMERCIAL</span>
+                    <h1>Histórico de vendas</h1>
+                    <p>Consulte as vendas realizadas, os itens vendidos e os pagamentos.</p>
+                </div>
+
+                <button class="btn btn-primary" id="refreshButton" type="button">
+                    ↻ Atualizar
+                </button>
+            </section>
+
+            <section class="metric-grid">
+                <article class="metric-card">
+                    <span>Vendas encontradas</span>
+                    <strong id="metricCount">—</strong>
+                    <small>No período selecionado</small>
+                </article>
+
+                <article class="metric-card">
+                    <span>Valor total</span>
+                    <strong id="metricTotal">—</strong>
+                    <small>Soma das vendas listadas</small>
+                </article>
+
+                <article class="metric-card">
+                    <span>Ticket médio</span>
+                    <strong id="metricAverage">—</strong>
+                    <small>Valor médio por venda</small>
+                </article>
+
+                <article class="metric-card">
+                    <span>Descontos</span>
+                    <strong id="metricDiscount">—</strong>
+                    <small>Descontos registrados</small>
+                </article>
+            </section>
+
+            <section class="panel">
+                <div class="panel-heading">
+                    <div>
+                        <span class="eyebrow">CONSULTA</span>
+                        <h2>Vendas registradas</h2>
+                    </div>
+
+                    <span class="result-count" id="resultCount">
+                        0 registros
+                    </span>
+                </div>
+
+                <div class="filters">
+                    <label>
+                        Data inicial
+                        <input type="date" id="dateStart">
+                    </label>
+
+                    <label>
+                        Data final
+                        <input type="date" id="dateEnd">
+                    </label>
+
+                    <label>
+                        Status
+                        <select id="statusFilter">
+                            <option value="">Todos os status</option>
+                            <option value="FINALIZADA">Finalizada</option>
+                            <option value="CANCELADA">Cancelada</option>
+                        </select>
+                    </label>
+
+                    <label class="search-field">
+                        Pesquisar
+                        <input
+                            type="search"
+                            id="searchInput"
+                            placeholder="Número, PDV ou operador"
+                        >
+                    </label>
+
+                    <button class="btn btn-primary" id="filterButton" type="button">
+                        Filtrar
+                    </button>
+                </div>
+
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Venda</th>
+                                <th>Data e hora</th>
+                                <th>PDV</th>
+                                <th>Operador</th>
+                                <th>Status</th>
+                                <th class="numeric">Total</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="salesTable">
+                            <tr>
+                                <td colspan="7" class="table-message">
+                                    Carregando vendas...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="table-footer">
+                    <span id="tableMessage">
+                        Histórico da empresa autenticada.
+                    </span>
+                </div>
+            </section>
+
+            <footer class="page-footer">
+                <span>© 2026 River Tech Todos os direitos reservados</span>
+                <span>ERP</span>
+            </footer>
+
+        </main>
+    </div>
+
+    <div class="modal-backdrop" id="saleModal" aria-hidden="true">
+        <section class="detail-modal" role="dialog" aria-modal="true">
+
+            <div class="modal-heading">
+                <div>
+                    <span class="eyebrow">DETALHES DA VENDA</span>
+                    <h2 id="modalTitle">Venda</h2>
+                </div>
+
+                <button
+                    class="icon-button"
+                    id="closeModal"
+                    type="button"
+                    aria-label="Fechar"
+                >×</button>
+            </div>
+
+            <div id="saleSummary" class="detail-summary"></div>
+
+            <h3>Produtos vendidos</h3>
+
+            <div class="table-wrap compact-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Produto</th>
+                            <th>Quantidade</th>
+                            <th>Preço unitário</th>
+                            <th>Desconto</th>
+                            <th class="numeric">Total</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="saleItems">
+                        <tr>
+                            <td colspan="5" class="table-message">
+                                Carregando itens...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Pagamentos</h3>
+
+            <div class="table-wrap compact-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Forma de pagamento</th>
+                            <th class="numeric">Valor</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="salePayments"></tbody>
+                </table>
+            </div>
+
+            <p class="modal-note" id="saleNotes"></p>
+        </section>
+    </div>
+
+    <div class="toast" id="toast" role="status"></div>
+</body>
+</html>

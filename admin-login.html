@@ -1,0 +1,176 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>River Tech - Administração</title>
+
+<link
+    rel="stylesheet"
+    href="css/admin-login.css"
+>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="js/supabase.js"></script>
+
+<script
+    src="js/admin-login.js"
+    defer
+></script>
+
+<link rel="icon" type="image/png" href="assets/logo.png"></head><body><main class="admin-login-page">
+
+    <section class="admin-login-card">
+
+        <!-- =========================================
+             MARCA
+             ========================================= -->
+
+        <div class="admin-brand">
+
+            <div class="admin-brand-logo">
+
+                <img
+                    src="assets/logo.png"
+                    alt="River Tech"
+                >
+
+            </div>
+
+            <div class="admin-brand-text">
+
+                <strong>
+                    RIVER TECH
+                </strong>
+
+                <span>
+                    ADMINISTRAÇÃO
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================================
+             CABEÇALHO
+             ========================================= -->
+
+        <div class="admin-login-header">
+
+            <span class="admin-eyebrow">
+                ÁREA RESTRITA
+            </span>
+
+            <h1>
+                Administração Geral
+            </h1>
+
+            <p>
+                Acesse o painel de gerenciamento
+                da plataforma River Tech.
+            </p>
+
+        </div>
+
+
+        <!-- =========================================
+             FORMULÁRIO
+             ========================================= -->
+
+        <form id="adminLoginForm">
+
+            <div class="admin-field">
+
+                <label for="adminEmail">
+                    E-mail
+                </label>
+
+                <input
+                    type="email"
+                    id="adminEmail"
+                    placeholder="administrador@email.com"
+                    autocomplete="username"
+                    required
+                >
+
+            </div>
+
+
+            <div class="admin-field">
+
+                <label for="adminPassword">
+                    Senha
+                </label>
+
+                <input
+                    type="password"
+                    id="adminPassword"
+                    placeholder="Digite sua senha"
+                    autocomplete="current-password"
+                    required
+                >
+
+            </div>
+
+
+            <button
+                type="submit"
+                id="adminLoginButton"
+            >
+                Entrar na administração
+            </button>
+
+
+            <div
+                id="adminLoginMessage"
+                class="admin-login-message"
+            ></div>
+
+        </form>
+
+
+        <!-- =========================================
+             SEGURANÇA
+             ========================================= -->
+
+        <div class="admin-security">
+
+            <span class="security-icon">
+                ●
+            </span>
+
+            <div>
+
+                <strong>
+                    Ambiente protegido
+                </strong>
+
+                <p>
+                    Acesso exclusivo para
+                    Administradores Gerais.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================================
+             RODAPÉ
+             ========================================= -->
+
+        <footer>
+
+            © 2026 River Tech Todos os direitos reservados
+
+        </footer>
+
+    </section>
+
+</main>
+
+</body></html>

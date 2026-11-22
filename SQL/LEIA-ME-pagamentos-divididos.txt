@@ -1,0 +1,21 @@
+ETAPA: PAGAMENTOS DIVIDIDOS DO PDV
+
+1. Antes de substituir arquivos, faça uma cópia de segurança da versão que está funcionando.
+2. No Supabase SQL Editor, revise e execute erp_finalizar_venda_pagamento_dividido.sql.
+3. Só depois que a função SQL for criada sem erros, substitua os arquivos do projeto pelos arquivos deste pacote.
+4. Teste primeiro em ambiente de teste ou com produtos de baixo valor e caixa de teste.
+
+A migração é aditiva: cria uma nova RPC e acrescenta colunas opcionais de metadados de cartão. Não substitui as funções antigas erp_finalizar_venda e erp_finalizar_venda_com_vale.
+
+Casos mínimos de teste:
+- Dinheiro em uma única forma (deve continuar usando a RPC antiga).
+- Pix em uma única forma (deve continuar usando a RPC antiga).
+- Cartão em uma única forma (usa a nova RPC para registrar modalidade/parcelas/NS).
+- Dinheiro + Pix.
+- Dinheiro + Cartão.
+- Pix + Cartão.
+- Vale parcial + duas formas de pagamento.
+- Vale que cobre o total.
+- Verificar o fluxo de caixa, totais do caixa, saldo do vale, estoque e comprovante.
+
+Não considere o teste concluído até confirmar que cada parcela aparece uma única vez em erp_venda_pagamentos e em erp_fluxo_caixa_movimentos, e que os totais do caixa correspondem às formas utilizadas.

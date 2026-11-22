@@ -1,0 +1,14 @@
+F:\PROJETOS\River_Tech_ERP\Windows-Print-Bridge\obj\Release\net8.0-windows\RiverTech.PrintBridge.GeneratedMSBuildEditorConfig.editorconfig
+F:\PROJETOS\River_Tech_ERP\Windows-Print-Bridge\obj\Release\net8.0-windows\RiverTech.PrintBridge.AssemblyInfoInputs.cache
+F:\PROJETOS\River_Tech_ERP\Windows-Print-Bridge\obj\Release\net8.0-windows\RiverTech.PrintBridge.AssemblyInfo.cs
+F:\PROJETOS\River_Tech_ERP\Windows-Print-Bridge\obj\Release\net8.0-windows\RiverTech.PrintBridge.csproj.CoreCompileInputs.cache
+F:\PROJETOS\River_Tech_ERP\Windows-Print-Bridge\bin\Release\net8.0-windows\RiverTech.PrintBridge.exe
+F:\PROJETOS\River_Tech_ERP\Windows-Print-Bridge\bin\Release\net8.0-windows\RiverTech.PrintBridge.deps.json
+F:\PROJETOS\River_Tech_ERP\Windows-Print-Bridge\bin\Release\net8.0-windows\RiverTech.PrintBridge.runtimeconfig.json
+F:\PROJETOS\River_Tech_ERP\Windows-Print-Bridge\bin\Release\net8.0-windows\RiverTech.PrintBridge.dll
+F:\PROJETOS\River_Tech_ERP\Windows-Print-Bridge\bin\Release\net8.0-windows\RiverTech.PrintBridge.pdb
+F:\PROJETOS\River_Tech_ERP\Windows-Print-Bridge\obj\Release\net8.0-windows\RiverTech.PrintBridge.dll
+F:\PROJETOS\River_Tech_ERP\Windows-Print-Bridge\obj\Release\net8.0-windows\refint\RiverTech.PrintBridge.dll
+F:\PROJETOS\River_Tech_ERP\Windows-Print-Bridge\obj\Release\net8.0-windows\RiverTech.PrintBridge.pdb
+F:\PROJETOS\River_Tech_ERP\Windows-Print-Bridge\obj\Release\net8.0-windows\RiverTech.PrintBridge.genruntimeconfig.cache
+F:\PROJETOS\River_Tech_ERP\Windows-Print-Bridge\obj\Release\net8.0-windows\ref\RiverTech.PrintBridge.dll

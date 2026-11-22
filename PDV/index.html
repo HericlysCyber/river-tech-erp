@@ -1,0 +1,136 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8">
+
+<meta name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+<title>River Tech PDV</title>
+
+<link rel="stylesheet" href="pdv.css">
+
+<link rel="icon" type="image/png" href="../assets/logo.png"></head><body><main class="pdv-login-page">
+
+    <section class="pdv-login-card">
+
+        <div class="pdv-brand">
+
+            <div class="pdv-logo">
+                <img src="../assets/logo.png" alt="River Tech" onerror="this.style.display='none';this.parentElement.textContent='R';">
+            </div>
+
+            <div>
+                <strong>RIVER TECH</strong>
+                <span>PDV</span>
+            </div>
+
+        </div>
+
+
+        <div class="pdv-title">
+
+            <span class="pdv-label">
+                PONTO DE VENDA
+            </span>
+
+            <h1>
+                Acesso ao PDV
+            </h1>
+
+            <p>
+                Entre com os dados de acesso deste caixa.
+            </p>
+
+        </div>
+
+
+        <form id="formLoginPDV">
+
+            <div class="pdv-field">
+
+                <label for="email">
+                    E-mail
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    autocomplete="username"
+                    placeholder="Digite o e-mail do PDV"
+                    required
+                >
+
+            </div>
+
+
+            <div class="pdv-field">
+
+                <label for="senha">
+                    Senha
+                </label>
+
+                <div class="password-wrapper">
+
+                    <input
+                        type="password"
+                        id="senha"
+                        autocomplete="current-password"
+                        placeholder="Digite sua senha"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        id="btnMostrarSenha"
+                        aria-label="Mostrar senha">
+                        ◉
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="mensagemLogin"
+                class="pdv-message"
+                hidden>
+            </div>
+
+
+            <button
+                type="submit"
+                id="btnEntrar"
+                class="pdv-button">
+
+                <span id="textoBotao">
+                    Entrar no PDV
+                </span>
+
+            </button>
+
+        </form>
+
+
+        <div class="pdv-footer">
+
+            <span>
+                Sistema de Ponto de Venda
+            </span>
+
+            <strong>
+                River Tech
+            </strong>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- SUPABASE -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<!-- CONFIGURAÇÃO + LOGIN -->
+<script src="pdv.js"></script>
+
+</body></html>

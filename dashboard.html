@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>River Tech ERP</title>
+
+    <link
+        rel="stylesheet"
+        href="css/dashboard.css"
+    >
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="js/supabase.js"></script>
+
+    <script
+        src="js/dashboard.js"
+        defer
+    ></script>
+
+<link rel="icon" type="image/png" href="assets/logo.png"></head>
+
+<body>
+
+    <div class="erp-layout">
+
+
+        <!-- =====================================================
+             SIDEBAR
+             ===================================================== -->
+
+        <aside class="sidebar">
+
+            <div class="sidebar-brand">
+
+                <div class="brand-mark">
+                    <img src="assets/logo.png" alt="River Tech">
+
+
+                </div>
+
+
+                <div class="brand-text">
+
+                    <strong>
+                        RIVER TECH
+                    </strong>
+
+                    <span>
+                        ERP
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- EMPRESA -->
+
+            <div class="company-mini">
+
+                <div
+                    class="company-logo"
+                    id="companyLogo"
+                >
+                    R
+                </div>
+
+                <div class="company-info">
+
+                    <strong id="companyName">
+                        Carregando...
+                    </strong>
+
+                    <span>
+                        Ambiente empresarial
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- MENU -->
+
+            <nav class="main-menu">
+
+                <div class="menu-title">
+                    PRINCIPAL
+                </div>
+
+
+                <button
+                    class="menu-item active"
+                    data-module="dashboard"
+                >
+
+                    <span class="menu-icon">
+                        ⌂
+                    </span>
+
+                    <span>
+                        Dashboard
+                    </span>
+
+                </button>
+
+
+                <div class="menu-title">
+                    GESTÃO
+                </div>
+
+
+                <button
+                    class="menu-item"
+                    data-module="pdv"
+                >
+
+                    <span class="menu-icon">
+                        ▣
+                    </span>
+
+                    <span>
+                        PDV
+                    </span>
+
+                </button>
+
+
+                <button
+                    class="menu-item"
+                    data-module="produtos"
+                >
+
+                    <span class="menu-icon">
+                        ◫
+                    </span>
+
+                    <span>
+                        Produtos
+                    </span>
+
+                </button>
+
+
+                <button
+                    class="menu-item"
+                    data-module="estoque"
+                >
+
+                    <span class="menu-icon">
+                        ▤
+                    </span>
+
+                    <span>
+                        Estoque
+                    </span>
+
+                </button>
+
+                <button class="menu-item" data-module="etiquetas">
+                    <span class="menu-icon">▧</span>
+                    <span>Etiquetas</span>
+                </button>
+
+                <div class="menu-title">COMERCIAL</div>
+
+                <button
+                class="menu-item"
+                data-module="fornecedores"
+            >
+                <span class="menu-icon">♙</span>
+                <span>Fornecedores</span>
+            </button>
+
+            <button
+                class="menu-item"
+                data-module="compras"
+            >
+                <span class="menu-icon">▤</span>
+                <span>Compras</span>
+            </button>
+            
+                <button
+                class="menu-item"
+                data-module="historico-vendas"
+            >
+                <span class="menu-icon">▤</span>
+                <span>Histórico de vendas</span>
+            </button>
+
+            <button class="menu-item" data-module="precificacao">
+                <span class="menu-icon">％</span>
+                <span>Precificação</span>
+            </button>
+
+            <button class="menu-item" data-module="ofertas">
+                <span class="menu-icon">★</span>
+                <span>Ofertas</span>
+            </button>
+
+
+
+            <button class="menu-item" data-module="devolucoes">
+    <span class="menu-icon">↩</span>
+    <span>Devoluções e vales</span>
+</button>
+
+            <button
+                class="menu-item"
+                data-module="historico-caixas"
+            >
+                <span class="menu-icon">▣</span>
+                <span>Histórico de caixas</span>
+            </button>
+
+                <div class="menu-title">RELACIONAMENTO</div>
+
+                <button
+                    class="menu-item"
+                    data-module="clientes"
+                >
+
+                    <span class="menu-icon">
+                        ♙
+                    </span>
+
+                    <span>
+                        Clientes
+                    </span>
+
+                </button>
+
+
+                <div class="menu-title">
+                    ADMINISTRAÇÃO
+                </div>
+
+
+                <button
+                    class="menu-item"
+                    data-module="financeiro"
+                >
+
+                    <span class="menu-icon">
+                        $
+                    </span>
+
+                    <span>
+                        Financeiro
+                    </span>
+
+                </button>
+
+
+                <button
+                    class="menu-item"
+                    data-module="relatorios"
+                >
+
+                    <span class="menu-icon">
+                        ◩
+                    </span>
+
+                    <span>
+                        Relatórios
+                    </span>
+
+                </button>
+
+
+                <button
+                    class="menu-item"
+                    data-module="configuracoes"
+                >
+
+                    <span class="menu-icon">
+                        ⚙
+                    </span>
+
+                    <span>
+                        Configurações
+                    </span>
+
+                </button>
+
+            </nav>
+
+
+            <!-- USUÁRIO -->
+
+            <div class="sidebar-user" id="sidebarProfile" role="button" tabindex="0" title="Personalizar perfil">
+
+                <div class="user-avatar">
+
+                    <span id="userInitial">
+                        U
+                    </span>
+
+                </div>
+
+                <div class="user-info">
+
+                    <strong id="userName">
+                        Carregando...
+                    </strong>
+
+                    <span>
+                        Administrador ERP
+                    </span>
+
+                </div>
+
+                <button
+                    id="logoutButton"
+                    class="logout-button"
+                    title="Sair"
+                >
+                    ↪
+                </button>
+
+            </div>
+
+        </aside>
+
+
+        <!-- =====================================================
+             CONTEÚDO
+             ===================================================== -->
+
+        <main class="main-content">
+
+
+            <!-- TOPBAR -->
+
+            <header class="topbar">
+
+                <div>
+
+                    <span class="page-eyebrow">
+                        VISÃO GERAL
+                    </span>
+
+                    <h1>
+                        Dashboard
+                    </h1>
+
+                </div>
+
+
+                <div class="topbar-right">
+
+                    <div class="system-status">
+
+                        <span class="status-dot"></span>
+
+                        Sistema operacional
+
+                    </div>
+
+                    <div class="topbar-date">
+                        <span id="currentDate">
+                            --
+                        </span>
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <!-- =================================================
+                 BOAS-VINDAS
+                 ================================================= -->
+
+            <section class="welcome-card">
+
+                <div class="welcome-content">
+
+                    <span class="welcome-label">
+                        AMBIENTE ERP
+                    </span>
+
+                    <h2>
+                        Olá, <span id="welcomeName">...</span>.
+                    </h2>
+
+                    <p>
+                        Bem-vindo ao ambiente de gestão da
+                        <strong id="welcomeCompany">
+                            sua empresa
+                        </strong>.
+                    </p>
+
+                </div>
+
+
+                <div class="welcome-company">
+
+                    <div
+                        class="large-company-logo"
+                        id="largeCompanyLogo"
+                    >
+                        R
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 CARDS
+                 ================================================= -->
+
+            <section class="stats-grid">
+
+
+                <div class="stat-card">
+
+                    <div class="stat-card-top">
+
+                        <span class="stat-icon">
+                            ▣
+                        </span>
+
+                        <span class="stat-label">
+                            PDVs
+                        </span>
+
+                    </div>
+
+                    <strong id="statPdvs">
+                        0
+                    </strong>
+
+                    <span
+                        class="stat-description"
+                        id="statPdvsDescription"
+                    >
+                        Carregando limite...
+                    </span>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-card-top">
+
+                        <span class="stat-icon">
+                            ◫
+                        </span>
+
+                        <span class="stat-label">
+                            Produtos
+                        </span>
+
+                    </div>
+
+                    <strong id="statProdutos">
+                        0
+                    </strong>
+
+                    <span class="stat-description">
+                        Produtos cadastrados
+                    </span>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-card-top">
+
+                        <span class="stat-icon">
+                            ♙
+                        </span>
+
+                        <span class="stat-label">
+                            Clientes
+                        </span>
+
+                    </div>
+
+                    <strong id="statClientes">
+                        0
+                    </strong>
+
+                    <span class="stat-description">
+                        Clientes cadastrados
+                    </span>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-card-top">
+
+                        <span class="stat-icon">
+                            $
+                        </span>
+
+                        <span class="stat-label">
+                            Vendas
+                        </span>
+
+                    </div>
+
+                    <strong id="statVendas">
+                        R$ 0,00
+                    </strong>
+
+                    <span class="stat-description">
+                        Resumo das vendas
+                    </span>
+
+                </div>
+
+
+            </section>
+
+
+            <!-- =================================================
+                 CONTEÚDO PRINCIPAL
+                 ================================================= -->
+
+            <section class="dashboard-grid">
+
+
+                <!-- MÓDULOS -->
+
+                <div class="panel modules-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <span class="panel-eyebrow">
+                                RECURSOS
+                            </span>
+
+                            <h3>
+                                Módulos disponíveis
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="module-grid">
+
+
+                        <button
+                            class="module-card"
+                            data-module="pdv"
+                        >
+
+                            <span class="module-card-icon">
+                                ▣
+                            </span>
+
+                            <strong>
+                                PDV
+                            </strong>
+
+                            <span>
+                                Frente de caixa
+                            </span>
+
+                        </button>
+
+
+                        <button
+                            class="module-card"
+                            data-module="produtos"
+                        >
+
+                            <span class="module-card-icon">
+                                ◫
+                            </span>
+
+                            <strong>
+                                Produtos
+                            </strong>
+
+                            <span>
+                                Cadastro e preços
+                            </span>
+
+                        </button>
+
+
+                        <button
+                            class="module-card"
+                            data-module="estoque"
+                        >
+
+                            <span class="module-card-icon">
+                                ▤
+                            </span>
+
+                            <strong>
+                                Estoque
+                            </strong>
+
+                            <span>
+                                Controle de estoque
+                            </span>
+
+                        </button>
+
+
+                        <button
+                            class="module-card"
+                            data-module="clientes"
+                        >
+
+                            <span class="module-card-icon">
+                                ♙
+                            </span>
+
+                            <strong>
+                                Clientes
+                            </strong>
+
+                            <span>
+                                Cadastro de clientes
+                            </span>
+
+                        </button>
+
+
+                        <button
+                            class="module-card"
+                            data-module="financeiro"
+                        >
+
+                            <span class="module-card-icon">
+                                $
+                            </span>
+
+                            <strong>
+                                Financeiro
+                            </strong>
+
+                            <span>
+                                Controle financeiro
+                            </span>
+
+                        </button>
+
+
+                        <button
+                            class="module-card"
+                            data-module="relatorios"
+                        >
+
+                            <span class="module-card-icon">
+                                ◩
+                            </span>
+
+                            <strong>
+                                Relatórios
+                            </strong>
+
+                            <span>
+                                Indicadores e análises
+                            </span>
+
+                        </button>
+
+
+                    </div>
+
+                </div>
+
+
+                <!-- INFORMAÇÕES DA EMPRESA -->
+
+                <div class="panel company-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <span class="panel-eyebrow">
+                                EMPRESA
+                            </span>
+
+                            <h3>
+                                Informações
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="company-detail-list">
+
+
+                        <div class="company-detail">
+
+                            <span>
+                                Empresa
+                            </span>
+
+                            <strong id="detailCompanyName">
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div class="company-detail">
+
+                            <span>
+                                Plano
+                            </span>
+
+                            <strong id="detailPlan">
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div class="company-detail">
+
+                            <span>
+                                Limite de PDVs
+                            </span>
+
+                            <strong id="detailPdvLimit">
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div class="company-detail">
+
+                            <span>
+                                Status
+                            </span>
+
+                            <strong class="status-active">
+                                ● Ativa
+                            </strong>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <button
+                        class="company-settings-button"
+                        data-module="configuracoes"
+                    >
+                        Configurações da empresa
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 ACOMPANHAMENTO RÁPIDO DAS VENDAS
+                 ================================================= -->
+            <section class="panel sales-overview-panel" style="margin-top:22px;background:#fff;border:1px solid #e7ebf0;border-radius:14px;padding:22px;">
+                <div class="panel-header" style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:15px;">
+                    <div><span class="panel-eyebrow">ACOMPANHAMENTO</span><h3 style="margin-top:5px;">Vendas recentes</h3><p style="color:#718096;font-size:13px;margin-top:5px;">Resumo rápido das vendas registradas pela sua loja.</p></div>
+                    <button type="button" class="company-settings-button" data-module="historico-vendas">Ver histórico completo</button>
+                </div>
+                <div class="sales-summary-grid">
+                    <div style="padding:14px;border:1px solid #e7ebf0;border-radius:10px;"><span style="font-size:12px;color:#718096;">Vendas hoje</span><strong id="vendasHojeQtd" style="display:block;font-size:22px;margin-top:6px;">0</strong></div>
+                    <div style="padding:14px;border:1px solid #e7ebf0;border-radius:10px;"><span style="font-size:12px;color:#718096;">Ticket médio hoje</span><strong id="ticketMedioHoje" style="display:block;font-size:22px;margin-top:6px;">R$ 0,00</strong></div>
+                    <div style="padding:14px;border:1px solid #e7ebf0;border-radius:10px;"><span style="font-size:12px;color:#718096;">Última venda</span><strong id="ultimaVendaData" style="display:block;font-size:15px;margin-top:9px;">—</strong></div>
+                </div>
+                <div style="overflow:auto;border:1px solid #e7ebf0;border-radius:10px;">
+                    <table style="width:100%;border-collapse:collapse;min-width:600px;"><thead><tr style="background:#f8fafc;text-align:left;"><th style="padding:11px;font-size:11px;color:#64748b;">Venda</th><th style="padding:11px;font-size:11px;color:#64748b;">Data e hora</th><th style="padding:11px;font-size:11px;color:#64748b;">Status</th><th style="padding:11px;font-size:11px;color:#64748b;">Total</th></tr></thead><tbody id="vendasRecentesTabela"><tr><td colspan="4" style="padding:20px;text-align:center;color:#718096;">Carregando vendas...</td></tr></tbody></table>
+                </div>
+                <p id="vendasDashboardAviso" style="font-size:12px;color:#718096;margin-top:10px;" aria-live="polite"></p>
+            </section>
+
+            <!-- =================================================
+                 RODAPÉ
+                 ================================================= -->
+
+            <footer class="main-footer">
+
+                <span>
+                    © 2026 River Tech Todos os direitos reservados
+                </span>
+
+                <span>
+                    ERP
+                </span>
+
+            </footer>
+
+        </main>
+
+    </div>
+
+
+
+<div id="profileModal" class="profile-modal" hidden>
+  <section class="profile-dialog" role="dialog" aria-modal="true" aria-labelledby="profileTitle">
+    <button type="button" id="profileClose" class="profile-close" aria-label="Fechar">×</button>
+    <h2 id="profileTitle">Meu perfil</h2>
+    <p>Personalize como seu perfil aparece neste ambiente.</p>
+    <form id="profileForm">
+      <label for="profilePhoto">Foto do perfil</label>
+      <input id="profilePhoto" type="file" accept="image/png,image/jpeg,.png,.jpg,.jpeg">
+      <img id="profilePhotoPreview" alt="Prévia da foto" hidden>
+      <label for="profileDisplayName">Nome de exibição</label>
+      <input id="profileDisplayName" maxlength="100" required>
+      <label for="profilePhone">Telefone</label>
+      <input id="profilePhone" maxlength="40" placeholder="(00) 00000-0000">
+      <label for="profileEmail">E-mail de contato</label>
+      <input id="profileEmail" type="email" maxlength="160">
+      <div class="profile-actions"><button type="button" id="profileCancel">Cancelar</button><button type="submit">Salvar perfil</button></div>
+      <small id="profileStatus" role="status"></small>
+    </form>
+  </section>
+</div>
+<style>
+.profile-modal[hidden]{display:none}.profile-modal{position:fixed;inset:0;background:#08172dcc;z-index:1000;display:flex;align-items:center;justify-content:center;padding:18px}.profile-dialog{background:#fff;border-radius:16px;width:min(460px,100%);padding:26px;position:relative;box-shadow:0 24px 80px #0003}.profile-dialog h2{margin:0 0 6px}.profile-dialog>p{color:#718096;font-size:13px;margin-bottom:18px}.profile-close{position:absolute;right:14px;top:12px;border:0;background:transparent;font-size:25px;cursor:pointer}.profile-dialog form{display:grid;gap:8px}.profile-dialog label{font-size:12px;font-weight:700;margin-top:5px}.profile-dialog input{width:100%;padding:10px;border:1px solid #d7dee8;border-radius:8px}.profile-dialog #profilePhotoPreview{width:74px;height:74px;border-radius:50%;object-fit:cover}.profile-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:12px}.profile-actions button{padding:10px 14px;border:0;border-radius:8px;background:#1266d6;color:#fff;font-weight:700;cursor:pointer}.profile-actions button:first-child{background:#e8edf4;color:#172033}.sidebar-user{cursor:pointer}.user-avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+</style>
+
+</body>
+
+</html>

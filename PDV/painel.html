@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>River Tech PDV</title>
+<link href="painel.css?v=20261107-correcao-logo" rel="stylesheet"/>
+<link href="../assets/logo.png" rel="icon" type="image/png"/></head><body><div class="pdv-app"><!-- =================================================
+     TOPO
+     ================================================= -->
+<header class="pdv-header">
+<div class="pdv-header-brand">
+<div class="pdv-logo" id="pdvLogo">
+    R
+</div>
+<div>
+<strong>
+                RIVER TECH
+            </strong>
+<span>
+                PDV
+            </span>
+</div>
+</div>
+<div class="pdv-header-info">
+<div class="pdv-company">
+<span>
+                EMPRESA
+            </span>
+<strong id="empresaNome">
+                Carregando...
+            </strong>
+</div>
+<div class="pdv-terminal">
+<span>
+                CAIXA
+            </span>
+<strong id="pdvNumero">
+                --
+            </strong>
+</div>
+<button class="pdv-logout" id="btnSair">
+
+            Sair
+
+        </button>
+</div>
+</header>
+<!-- =================================================
+     CONTEÚDO
+     ================================================= -->
+<main class="pdv-main">
+<!-- =================================================
+         CABEÇALHO
+         ================================================= -->
+<section class="pdv-welcome">
+<div>
+<span class="pdv-section-label">
+                PONTO DE VENDA
+            </span>
+<h1>
+                Caixa pronto para operar
+            </h1>
+<p>
+                Este ambiente está vinculado exclusivamente
+                ao seu ERP.
+            </p>
+</div>
+<div class="pdv-status">
+<span class="status-dot"></span>
+<span>
+                PDV online
+            </span>
+</div>
+</section>
+<!-- =================================================
+         DASHBOARD
+         ================================================= -->
+<section class="pdv-dashboard-grid">
+<!-- =================================================
+             CAIXA
+             ================================================= -->
+<article class="pdv-action-card caixa-card">
+<div class="action-icon">
+                $
+            </div>
+<div>
+<span>
+                    CAIXA
+                </span>
+<h2 id="tituloCaixa">
+                    Caixa fechado
+                </h2>
+<p id="descricaoCaixa">
+                    Abra o caixa para começar a realizar vendas.
+                </p>
+</div>
+<!-- CAIXA FECHADO -->
+<div id="areaCaixaFechado">
+<label class="campo-caixa-label" for="valorInicial">
+
+                    Valor inicial do caixa
+
+                </label>
+<div class="valor-input">
+<span>
+                        R$
+                    </span>
+<input id="valorInicial" min="0" placeholder="0,00" step="0.01" type="number" value="0.00"/>
+</div>
+<button class="action-button" id="btnAbrirCaixa">
+
+                    Abrir caixa
+
+                </button>
+</div>
+<!-- CAIXA ABERTO -->
+<div class="caixa-aberto" hidden="" id="areaCaixaAberto">
+<div class="caixa-aberto-status">
+<span class="status-dot"></span>
+
+                    Caixa aberto
+
+                </div>
+<strong id="valorInicialExibido">
+                    R$ 0,00
+                </strong>
+<button class="action-button" id="btnNovaVenda" type="button">
+    Nova venda
+</button>
+<button class="action-button btn-fechar-caixa" id="btnAbrirFechamento" type="button">
+    Fechar caixa
+</button>
+<button class="action-button" id="btnCancelarVendaCaixa" type="button">
+    Cancelar venda
+</button>
+<button class="action-button btn-sangria-caixa" id="btnAbrirSangria" type="button">
+    Sangria de caixa
+</button>
+</div>
+</article>
+<!-- =================================================
+             TERMINAL
+             ================================================= -->
+<article class="pdv-info-card">
+<span>
+                TERMINAL
+            </span>
+<strong id="terminalStatus">
+                Ativo
+            </strong>
+<p>
+                Este caixa está autorizado
+                a operar neste ambiente.
+            </p>
+</article>
+<!-- =================================================
+             USUÁRIO
+             ================================================= -->
+<article class="pdv-info-card">
+<span>
+                USUÁRIO
+            </span>
+<strong id="usuarioNome">
+                Carregando...
+            </strong>
+<p id="usuarioEmail">
+                --
+            </p>
+</article>
+</section>
+<!-- =================================================
+         SEGURANÇA
+         ================================================= -->
+<section class="pdv-security-card">
+<div>
+<span>
+                SEGURANÇA
+            </span>
+<h2>
+                Ambiente protegido
+            </h2>
+<p>
+                O acesso deste caixa está vinculado
+                à empresa e ao PDV autenticados.
+            </p>
+</div>
+<div class="security-badge">
+<strong>
+                PDV
+            </strong>
+<span>
+                Autorizado
+            </span>
+</div>
+</section>
+</main>
+<!-- MODAL DE FECHAMENTO DE CAIXA -->
+<div class="fechamento-overlay" hidden="" id="modalFechamento">
+<section class="fechamento-modal">
+<header class="fechamento-header">
+<div>
+<span>CONFERÊNCIA FINANCEIRA</span>
+<h2>Fechamento de caixa</h2>
+<p>Confira os valores antes de encerrar o caixa.</p>
+</div>
+<button aria-label="Cancelar fechamento" class="fechamento-fechar" id="btnCancelarFechamento" type="button">
+                ×
+            </button>
+</header>
+<div class="fechamento-resumo">
+<div class="fechamento-item">
+<span>Valor inicial</span>
+<strong id="fechValorInicial">R$ 0,00</strong>
+</div>
+<div class="fechamento-item">
+<span>Vendas em dinheiro</span>
+<strong id="fechDinheiro">R$ 0,00</strong>
+</div>
+<div class="fechamento-item">
+<span>Vendas em PIX</span>
+<strong id="fechPix">R$ 0,00</strong>
+</div>
+<div class="fechamento-item">
+<span>Vendas em cartão</span>
+<strong id="fechCartao">R$ 0,00</strong>
+</div>
+<div class="fechamento-item">
+<span>Outras formas</span>
+<strong id="fechOutros">R$ 0,00</strong>
+</div>
+<div class="fechamento-item fechamento-esperado">
+<span>Dinheiro esperado na gaveta</span>
+<strong id="fechEsperado">R$ 0,00</strong>
+</div>
+</div>
+<div class="fechamento-campo">
+<label for="fechValorContado">
+                Dinheiro contado fisicamente (R$)
+            </label>
+<input id="fechValorContado" min="0" placeholder="Informe o valor contado" step="0.01" type="number" value=""/>
+</div>
+<div class="fechamento-diferenca">
+<span id="fechRotuloDiferenca">
+                Diferença do caixa
+            </span>
+<strong id="fechDiferenca">R$ 0,00</strong>
+<small id="fechDescricaoDiferenca">
+                Informe o valor contado para conferir.
+            </small>
+</div>
+<div class="fechamento-campo">
+<label for="fechObservacao">
+                Observações (opcional)
+            </label>
+<textarea id="fechObservacao" placeholder="Registre alguma ocorrência ou diferença..." rows="3"></textarea>
+</div>
+<div class="fechamento-acoes">
+<button id="btnCancelarFechamentoRodape" type="button">
+                Voltar
+            </button>
+<button id="btnConfirmarFechamento" type="button">
+                Confirmar fechamento
+            </button>
+</div>
+</section>
+</div>
+</div><!-- =================================================
+     MODAL NOVA VENDA
+     ================================================= --><div class="fechamento-overlay" hidden="" id="modalSangria">
+<section class="fechamento-modal">
+<header class="fechamento-header"><div><span>MOVIMENTAÇÃO DE CAIXA</span><h2>Sangria de caixa</h2><p>Registre a retirada de dinheiro do caixa. O comprovante será impresso em duas vias.</p></div><button aria-label="Fechar" class="fechamento-fechar" id="btnCancelarSangria" type="button">×</button></header>
+<div class="fechamento-conteudo">
+<label for="sangriaValor">Valor (R$)</label><input id="sangriaValor" min="0.01" placeholder="0,00" step="0.01" type="number"/>
+<label for="sangriaMotivo">Motivo / destino</label><textarea id="sangriaMotivo" maxlength="250" placeholder="Informe o motivo da retirada" rows="3"></textarea>
+<p id="sangriaMensagem" role="status"></p>
+</div>
+<footer class="fechamento-footer"><button class="fechamento-secundario" id="btnCancelarSangriaRodape" type="button">Cancelar</button><button class="fechamento-confirmar" id="btnConfirmarSangria" type="button">Registrar e imprimir 2 vias</button></footer>
+</section>
+</div>
+<div class="venda-overlay" hidden="" id="modalVenda"><section class="venda-modal">
+<!-- =================================================
+         CABEÇALHO DA VENDA
+         ================================================= -->
+<header class="venda-header">
+<div>
+<span>
+                PONTO DE VENDA
+            </span>
+<h2>
+                Nova venda
+            </h2>
+</div>
+<button class="venda-fechar" id="btnFecharVenda" type="button">
+
+            ×
+
+        </button>
+</header>
+<!-- ABAS DA VENDA -->
+<nav aria-label="Etapas da venda" class="venda-tabs">
+<button aria-selected="true" class="venda-tab active" id="tabProdutosVenda" type="button">
+            Produtos e carrinho
+        </button>
+<button aria-selected="false" class="venda-tab" id="tabClienteVenda" type="button">
+            Identificar cliente por CPF <span class="cliente-tab-status" id="clienteTabStatus">Opcional</span>
+</button>
+<button aria-selected="false" class="venda-tab" id="tabValeCreditoVenda" type="button">Vale-crédito</button>
+<button aria-controls="modalPagamento" aria-haspopup="dialog" class="venda-tab btn-abrir-pagamento" id="btnAbrirPagamento" type="button">Pagamento</button>
+<button aria-selected="false" class="venda-tab" id="tabConsultaPrecoVenda" type="button">Consultar preços</button>
+</nav>
+<!-- IDENTIFICAÇÃO DO CLIENTE -->
+<section class="cliente-venda-panel" hidden="" id="areaClienteVenda">
+<div class="cliente-venda-intro">
+<span class="cliente-venda-kicker">IDENTIFICAÇÃO DO CLIENTE</span>
+<h3>Localizar cliente pelo CPF</h3>
+<p>Digite o CPF cadastrado nesta loja para associar o cliente à venda. A identificação é opcional.</p>
+</div>
+<form class="cliente-venda-busca" id="formBuscarClientePDV">
+<label for="campoCpfClientePDV">CPF do cliente</label>
+<div class="cliente-venda-campo">
+<input aria-describedby="mensagemClientePDV" autocomplete="off" id="campoCpfClientePDV" inputmode="numeric" maxlength="14" name="cpf" placeholder="000.000.000-00" type="text"/>
+<button class="cliente-venda-btn" id="btnBuscarClientePDV" type="submit">Buscar CPF</button>
+<button class="cliente-venda-btn secundario" id="btnLimparClientePDV" type="button">Remover cliente</button>
+</div>
+</form>
+<div aria-live="polite" class="cliente-venda-mensagem" id="mensagemClientePDV" role="status">Nenhum cliente identificado nesta venda.</div>
+<div class="cliente-venda-dados" hidden="" id="dadosClientePDV"></div>
+<div class="cliente-venda-rodape">
+<span>O cadastro precisa existir no módulo Clientes desta mesma loja.</span>
+<button class="cliente-venda-btn" id="btnVoltarVendaCliente" type="button">Voltar para produtos</button>
+</div>
+</section>
+<section class="cliente-venda-panel" hidden="" id="areaValeCreditoPanel">
+<div class="cliente-venda-intro">
+<span class="cliente-venda-kicker">VALE-CRÉDITO</span>
+<h3>Aplicar vale na venda atual</h3>
+<p>Consulte o código do vale e confira o saldo antes de concluir a venda. A validação continua sendo feita pelo servidor.</p>
+</div>
+<div class="cliente-venda-rodape"><span>O vale só é consumido quando a venda é confirmada.</span><button class="cliente-venda-btn" id="btnVoltarVendaVale" type="button">Voltar para produtos</button></div>
+</section>
+<section class="cliente-venda-panel" hidden="" id="areaConsultaPrecoVenda">
+<div class="cliente-venda-intro">
+<span class="cliente-venda-kicker">CONSULTA RÁPIDA</span>
+<h3>Consultar preço sem alterar a venda</h3>
+<p>Pesquise por código, código de barras ou descrição. Esta consulta não adiciona produtos ao carrinho e não altera preços nem estoque.</p>
+</div>
+<div class="price-search-wrap">
+<label for="campoConsultaPreco">Código, código de barras ou descrição</label>
+<input autocomplete="off" id="campoConsultaPreco" placeholder="Digite para consultar..." type="search"/>
+<div aria-live="polite" class="price-search-results" id="resultadosConsultaPreco"><p>Digite um termo para consultar produtos.</p></div>
+</div>
+<div class="cliente-venda-rodape"><span>Consulta somente leitura.</span><button class="cliente-venda-btn" id="btnVoltarConsultaPreco" type="button">Voltar para produtos</button></div>
+</section>
+<!-- =================================================
+         ÁREA PRINCIPAL DA VENDA
+         ================================================= -->
+<div class="venda-layout" id="layoutProdutosVenda">
+<!-- =================================================
+             PRODUTOS
+             ================================================= -->
+<section class="venda-produtos">
+<div class="venda-busca">
+<span>
+                    🔎
+                </span>
+<input autocomplete="off" id="campoBuscaProduto" placeholder="Buscar produto, código ou código de barras..." type="text"/>
+</div>
+<p class="venda-busca-ajuda">Digite ou leia o código de barras e pressione Enter. O produto será adicionado diretamente ao carrinho.</p>
+<div class="carrinho-lista-area">
+<div class="carrinho-header">
+<div><span>VENDA ATUAL</span><h3>Itens do carrinho</h3></div>
+<span class="contador-itens" id="contadorItens">0 itens</span>
+</div>
+<div class="lista-carrinho" id="listaCarrinho">
+<div class="carrinho-vazio"><div>🛒</div><strong>Carrinho vazio</strong><span>Digite ou leia o código do produto para começar.</span></div>
+</div>
+<div aria-live="polite" class="resumo-ultimo-item" id="resumoUltimoItem">
+<span>ÚLTIMO ITEM REGISTRADO</span><strong>Nenhum produto adicionado</strong><small>Quantidade, preço e subtotal aparecerão aqui.</small>
+</div>
+<div aria-live="polite" class="subtotal-acumulado-venda">
+<span>SUBTOTAL ACUMULADO</span>
+<strong id="subtotalAcumuladoVenda">R$ 0,00</strong>
+</div>
+</div>
+<div class="lista-produtos" hidden="" id="listaProdutos"></div>
+</section>
+<!-- =================================================
+             CARRINHO
+             ================================================= -->
+<div aria-labelledby="tituloModalPagamento" aria-modal="true" class="pagamento-overlay" hidden="" id="modalPagamento" role="dialog">
+<section class="pagamento-modal">
+<header class="pagamento-modal-header"><div><span>FINALIZAÇÃO DA VENDA</span><h3 id="tituloModalPagamento">Pagamento</h3></div><button aria-label="Voltar ao carrinho" id="btnFecharPagamento" type="button">×</button></header>
+<aside class="venda-carrinho">
+<!-- =================================================
+                 RESUMO DA VENDA
+                 ================================================= -->
+<div class="carrinho-resumo">
+<div class="resumo-linha">
+<span>
+                        Subtotal
+                    </span>
+<strong id="subtotalVenda">
+                        R$ 0,00
+                    </strong>
+</div>
+<!-- DESCONTO -->
+<div class="campo-desconto">
+<label for="descontoVenda">
+                        Desconto
+                    </label>
+<div>
+<span>
+                            R$
+                        </span>
+<input id="descontoVenda" min="0" step="0.01" type="number" value="0"/>
+</div>
+</div>
+<!-- FORMA DE PAGAMENTO
+                     O painel.js pode preencher esta área
+                     dinamicamente.
+                -->
+<div class="area-forma-pagamento" id="areaFormaPagamento">
+</div>
+<!-- TOTAL -->
+<div class="total-venda">
+<span>
+                        TOTAL
+                    </span>
+<strong id="totalVenda">
+                        R$ 0,00
+                    </strong>
+</div>
+<!-- FINALIZAR -->
+<button class="btn-finalizar-venda" disabled="" id="btnFinalizarVenda" type="button">
+
+                    Finalizar venda
+
+                </button>
+</div>
+</aside>
+</section>
+</div>
+</div>
+</section>
+<!-- SELETOR DE IMPRESSÃO DO COMPROVANTE -->
+
+
+</div><!-- =================================================
+     SCRIPTS
+     ================================================= --><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><style>
+.rt-print-overlay{position:fixed;inset:0;z-index:99999;background:rgba(15,23,42,.62);display:flex;align-items:center;justify-content:center;padding:18px}.rt-print-overlay[hidden]{display:none!important}.rt-print-dialog{position:relative;background:#fff;color:#172033;width:min(100%,560px);border-radius:18px;padding:28px;box-shadow:0 24px 70px rgba(0,0,0,.28);font-family:Arial,sans-serif}.rt-print-dialog h2{margin:0 34px 8px 0;font-size:22px}.rt-print-dialog>p{color:#64748b;margin:0 0 20px}.rt-print-close{position:absolute;right:16px;top:12px;border:0;background:transparent;font-size:30px;cursor:pointer;color:#64748b}.rt-print-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.rt-print-option{border:1px solid #dbe2ea;border-radius:12px;background:#fff;padding:17px 10px;display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer;color:#172033;min-height:132px}.rt-print-option:hover,.rt-print-option:focus{border-color:#2563eb;background:#eff6ff;outline:2px solid #bfdbfe}.rt-print-option-default{border-color:#2563eb;background:#eff6ff;box-shadow:inset 0 0 0 1px #2563eb}.rt-print-icon{font-size:32px;color:#2563eb}.rt-print-option strong{text-align:center;font-size:13px}.rt-print-option small{color:#64748b;text-align:center}.rt-print-hint{font-size:12px!important;line-height:1.5;margin:18px 0!important}.rt-bridge-panel{margin:16px 0 0;padding:14px;border:1px solid #dbe2ea;border-radius:12px;background:#f8fafc}.rt-bridge-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.rt-bridge-row select{flex:1;min-width:180px;padding:10px;border:1px solid #cbd5e1;border-radius:8px;background:#fff}.rt-bridge-status{font-size:12px;color:#475569;margin:8px 0}.rt-bridge-preference{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:12px;color:#475569}.rt-bridge-preference input{width:16px;height:16px;accent-color:#1d4ed8}.rt-bridge-actions{display:flex;gap:8px;flex-wrap:wrap}.rt-bridge-actions button{border:0;border-radius:8px;padding:10px 12px;cursor:pointer}.rt-bridge-primary{background:#1d4ed8;color:#fff}.rt-bridge-secondary{background:#e2e8f0;color:#1e293b}.rt-print-cancel{border:0;border-radius:9px;padding:10px 16px;background:#eef2f7;color:#334155;cursor:pointer}@media(max-width:480px){.rt-print-dialog{padding:22px 16px}.rt-print-options{grid-template-columns:1fr}.rt-print-option{min-height:0;flex-direction:row;justify-content:flex-start;text-align:left;padding:12px}.rt-print-option small{margin-left:auto}}
+</style><div aria-hidden="true" class="rt-print-overlay" hidden="" id="modalEscolhaImpressao">
+<section aria-labelledby="tituloEscolhaImpressao" aria-modal="true" class="rt-print-dialog" role="dialog">
+<button aria-label="Fechar" class="rt-print-close" id="btnFecharEscolhaImpressao" type="button">×</button>
+<h2 id="tituloEscolhaImpressao">Como deseja imprimir?</h2>
+<p>Escolha o formato do comprovante não fiscal.</p>
+<div class="rt-print-options">
+<button class="rt-print-option" data-print-format="80" type="button">
+<span class="rt-print-icon">▤</span><strong>Impressora térmica</strong><small>Bobina de 80 mm</small>
+</button>
+<button class="rt-print-option" data-print-format="58" type="button">
+<span class="rt-print-icon">▤</span><strong>Térmica compacta</strong><small>Bobina de 58 mm</small>
+</button>
+<button class="rt-print-option" data-print-format="a4" type="button">
+<span class="rt-print-icon">▧</span><strong>Impressora convencional</strong><small>Folha A4</small>
+</button>
+</div>
+<div class="rt-bridge-panel" style="background:#fff;margin-top:12px">
+<strong>Preferência de papel neste computador</strong>
+<div class="rt-bridge-row" style="margin-top:9px"><label for="rtFormatoPadrao" style="font-size:13px;color:#475569">Formato preferido</label><select id="rtFormatoPadrao" aria-label="Formato de impressão preferido"><option value="80">Térmica 80 mm</option><option value="58">Térmica 58 mm</option><option value="a4">Folha A4</option></select></div>
+<label class="rt-bridge-preference"><input type="checkbox" id="rtSalvarFormatoPadrao"> Memorizar formato preferido neste computador</label>
+<p class="rt-bridge-status" id="rtFormatoStatus">Você pode escolher um formato diferente a cada impressão.</p>
+</div>
+<div class="rt-bridge-panel">
+<strong>Impressora conectada ao Windows</strong>
+<p class="rt-bridge-status" id="rtBridgeStatus">Componente Windows não verificado. Você pode continuar usando a impressão pelo navegador.</p>
+<div class="rt-bridge-row"><select id="rtBridgePrinter" aria-label="Impressora instalada no Windows"><option value="">Detectar impressoras...</option></select><button class="rt-bridge-actions rt-bridge-secondary" id="rtBridgeDetectar" type="button">Detectar</button></div>
+<label class="rt-bridge-preference"><input type="checkbox" id="rtBridgeSalvarPadrao"> Memorizar esta impressora como padrão neste computador</label>
+<div class="rt-bridge-actions" style="margin-top:10px"><button class="rt-bridge-primary" id="rtBridgeImprimir80" type="button" disabled>Imprimir 80 mm pelo Windows</button></div>
+</div>
+<p class="rt-print-hint">Alternativamente, escolha 80 mm, 58 mm ou A4 acima para abrir a impressão tradicional do navegador e selecionar a impressora ou Salvar como PDF.</p>
+<button class="rt-print-cancel" id="btnCancelarEscolhaImpressao" type="button">Agora não</button>
+</section>
+</div><script src="painel.js?v=20261108-layout-cupom01"></script></body></html>

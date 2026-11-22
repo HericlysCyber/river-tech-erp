@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fornecedores | River Tech ERP</title>
+
+    <link rel="stylesheet" href="css/fornecedores.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase.js"></script>
+    <script src="js/fornecedores.js" defer></script>
+<link rel="icon" type="image/png" href="assets/logo.png"></head>
+<body>
+    <main class="page">
+        <header class="topbar">
+            <div class="brand">
+                <img src="assets/logo.png" alt="River Tech">
+                <div>
+                    <span>RIVER TECH ERP</span>
+                    <h1>Fornecedores</h1>
+                    <p id="empresaNome">Carregando empresa...</p>
+                </div>
+            </div>
+
+            <button class="btn btn-secondary" id="voltarButton">
+                ← Voltar ao ERP
+            </button>
+        </header>
+
+        <section class="intro">
+            <div>
+                <span class="eyebrow">GESTÃO DE COMPRAS</span>
+                <h2>Cadastro de fornecedores</h2>
+                <p>Gerencie os parceiros que fornecem produtos para sua empresa.</p>
+            </div>
+            <div class="counter">
+                <span>Fornecedores cadastrados</span>
+                <strong id="totalFornecedores">0</strong>
+            </div>
+        </section>
+
+        <section class="panel">
+            <div class="panel-header">
+                <div>
+                    <h2 id="formTitulo">Novo fornecedor</h2>
+                    <p>Preencha os dados do fornecedor.</p>
+                </div>
+            </div>
+
+            <form id="fornecedorForm">
+                <input type="hidden" id="fornecedorId">
+
+                <div class="form-grid">
+                    <label>
+                        Nome / Razão social *
+                        <input id="nome" required maxlength="180">
+                    </label>
+
+                    <label>
+                        Nome fantasia
+                        <input id="nomeFantasia" maxlength="180">
+                    </label>
+
+                    <label>
+                        CPF / CNPJ
+                        <input id="documento" maxlength="30">
+                    </label>
+
+                    <label>
+                        Telefone
+                        <input id="telefone" maxlength="40">
+                    </label>
+
+                    <label>
+                        E-mail
+                        <input id="email" type="email" maxlength="180">
+                    </label>
+
+                    <label>
+                        Endereço
+                        <input id="endereco" maxlength="250">
+                    </label>
+
+                    <label class="full">
+                        Observações
+                        <textarea id="observacao" rows="3" maxlength="2000"></textarea>
+                    </label>
+                </div>
+
+                <div class="form-actions">
+                    <button class="btn btn-secondary" type="button" id="limparButton">
+                        Limpar
+                    </button>
+                    <button class="btn btn-primary" type="submit" id="salvarButton">
+                        Salvar fornecedor
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <section class="panel">
+            <div class="list-header">
+                <div>
+                    <h2>Fornecedores cadastrados</h2>
+                    <p>Consulte, edite ou desative seus fornecedores.</p>
+                </div>
+
+                <input id="pesquisa" class="search"
+                    placeholder="Pesquisar fornecedor...">
+            </div>
+
+            <div id="mensagem" class="message" hidden></div>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Fornecedor</th>
+                            <th>Documento</th>
+                            <th>Contato</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="listaFornecedores">
+                        <tr>
+                            <td colspan="5">Carregando fornecedores...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <footer>© 2026 River Tech Todos os direitos reservados</footer>
+    </main>
+</body>
+</html>

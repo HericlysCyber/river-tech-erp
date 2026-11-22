@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Configurações | River Tech ERP</title>
+<link rel="stylesheet" href="css/dashboard.css">
+<style>
+.config-wrap{max-width:1050px;margin:28px auto;padding:0 20px;color:#172033}.config-head{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap;margin-bottom:22px}.config-head h1{margin:4px 0}.config-card{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:24px;margin:16px 0;box-shadow:0 8px 28px #0f23450a}.config-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.config-field{display:flex;flex-direction:column;gap:6px}.config-field.full{grid-column:1/-1}.config-field label{font-size:13px;font-weight:700}.config-field input,.config-field textarea{font:inherit;padding:11px 12px;border:1px solid #cbd5e1;border-radius:9px;width:100%}.config-field textarea{min-height:80px;resize:vertical}.config-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.config-btn{border:0;border-radius:9px;padding:12px 18px;background:#1266d6;color:white;font-weight:700;cursor:pointer}.config-btn.secondary{background:#eef2f7;color:#172033}.config-status{margin-top:12px;font-size:14px}.config-logo{max-width:150px;max-height:90px;object-fit:contain;display:block;margin-top:8px}.config-note{color:#64748b;font-size:13px;line-height:1.5}@media(max-width:650px){.config-grid{grid-template-columns:1fr}.config-field.full{grid-column:auto}}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="js/supabase.js"></script><script src="js/configuracoes.js?v=20261031-fix2" defer></script>
+<link rel="icon" type="image/png" href="assets/logo.png"></head><body>
+<main class="config-wrap">
+<header class="config-head"><div><small>RIVER TECH ERP</small><h1>Configurações da empresa</h1><p>Personalize os dados exibidos nos comprovantes e no ambiente da loja.</p></div><a href="dashboard.html">← Voltar ao ERP</a></header>
+<section class="config-card"><h2>Identidade e contato</h2><p class="config-note">Os dados desta tela são salvos para a empresa conectada. A autenticação e as permissões atuais não são alteradas.</p>
+<form id="formConfig">
+<div class="config-grid">
+<div class="config-field"><label for="cfgNome">Nome de exibição</label><input id="cfgNome" maxlength="120" placeholder="Nome da loja"></div>
+<div class="config-field"><label for="cfgTelefone">Telefone</label><input id="cfgTelefone" maxlength="40" placeholder="(00) 00000-0000"></div>
+<div class="config-field"><label for="cfgEmail">E-mail de contato</label><input id="cfgEmail" type="email" maxlength="160" placeholder="contato@loja.com.br"></div>
+<div class="config-field full"><label for="cfgLogoFile">Logo para impressão do comprovante (PNG, JPG ou JPEG)</label><input id="cfgLogoFile" type="file" accept="image/png,image/jpeg,.png,.jpg,.jpeg"><small class="config-note">Selecione uma imagem do computador ou celular. A logo será usada somente no comprovante impresso.</small><input id="cfgLogo" type="hidden"></div>
+<div class="config-field full"><img id="cfgLogoPreview" class="config-logo" alt="Prévia da logo" hidden></div>
+<div class="config-field full"><label for="cfgCabecalho">Cabeçalho personalizado do comprovante (opcional)</label><textarea id="cfgCabecalho" maxlength="500" placeholder="Mensagem exibida abaixo do nome da empresa"></textarea></div>
+<div class="config-field full"><label for="cfgEndereco">Endereço</label><input id="cfgEndereco" maxlength="250" placeholder="Rua, número, bairro, cidade/UF"></div>
+<div class="config-field full"><label for="cfgRodape">Rodapé dos comprovantes</label><textarea id="cfgRodape" maxlength="500" placeholder="Obrigado pela preferência!"></textarea></div>
+</div><div class="config-actions"><button class="config-btn" id="cfgSalvar" type="submit">Salvar configurações</button><button class="config-btn secondary" type="button" id="cfgRecarregar">Descartar alterações</button></div><div id="cfgStatus" class="config-status" role="status"></div>
+</form></section>
+<section class="config-card"><h2>Impressão</h2><p class="config-note">Os comprovantes usam a impressão do navegador. Na janela de impressão, escolha a impressora ou “Salvar como PDF”. O rodapé configurado será usado nos próximos comprovantes que leem as configurações da empresa.</p></section>
+</main></body></html>

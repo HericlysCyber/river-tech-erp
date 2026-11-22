@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Financeiro | River Tech ERP</title>
+  <link rel="stylesheet" href="css/financeiro.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase.js"></script>
+  <script defer src="js/financeiro.js"></script>
+<link rel="icon" type="image/png" href="assets/logo.png"></head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar">
+    <a class="brand" href="dashboard.html">
+      <img src="assets/logo.png" alt="River Tech" onerror="this.style.display='none'">
+      <span><strong>River Tech</strong><small>ERP · Financeiro</small></span>
+    </a>
+    <nav class="side-nav" aria-label="Menu principal">
+      <a href="dashboard.html">⌂ &nbsp; Dashboard</a>
+      <a href="pdv.html">▣ &nbsp; PDV</a>
+      <a href="produtos.html">◇ &nbsp; Produtos</a>
+      <a href="estoque.html">▤ &nbsp; Estoque</a>
+      <a href="fornecedores.html">♧ &nbsp; Fornecedores</a>
+      <a href="compras.html">⇄ &nbsp; Compras</a>
+      <a href="historico-vendas.html">▥ &nbsp; Histórico de vendas</a>
+      <a href="historico-caixas.html">▣ &nbsp; Histórico de caixas</a>
+      <a class="active" href="financeiro.html">R$ &nbsp; Financeiro</a>
+    </nav>
+    <div class="sidebar-footer">
+      <span class="status-dot"></span>
+      <span><strong id="companyNameSide">Empresa</strong><small>Ambiente protegido</small></span>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">GESTÃO FINANCEIRA</p>
+        <h1>Financeiro</h1>
+        <p class="subtitle">Contas, pagamentos e movimentações financeiras da empresa.</p>
+      </div>
+      <div class="topbar-actions">
+        <a class="button button-quiet" href="dashboard.html">Voltar ao ERP</a>
+        <div class="user-chip">
+          <span class="user-avatar" id="userInitial">U</span>
+          <span><strong id="userName">Administrador</strong><small>Administrador ERP</small></span>
+        </div>
+      </div>
+    </header>
+
+    <section class="notice" id="pageMessage" role="status" aria-live="polite" hidden></section>
+
+    <section class="finance-tabs" aria-label="Áreas do financeiro">
+      <button type="button" class="finance-tab active" data-view="contas">Contas e lançamentos</button>
+      <button type="button" class="finance-tab" data-view="fluxo">Fluxo de caixa</button>
+    </section>
+
+    <section id="accountsView">
+      <section class="metric-grid" aria-label="Resumo de contas">
+        <article class="metric-card">
+          <div class="metric-heading"><span>Despesas pendentes</span><span class="metric-icon orange">◷</span></div>
+          <strong id="metricPending">R$ 0,00</strong>
+          <small>Valores ainda não pagos</small>
+        </article>
+        <article class="metric-card">
+          <div class="metric-heading"><span>Despesas vencidas</span><span class="metric-icon red">!</span></div>
+          <strong id="metricOverdue">R$ 0,00</strong>
+          <small>Contas pendentes após vencimento</small>
+        </article>
+        <article class="metric-card">
+          <div class="metric-heading"><span>Pagas no mês</span><span class="metric-icon green">✓</span></div>
+          <strong id="metricPaid">R$ 0,00</strong>
+          <small>Despesas pagas neste mês</small>
+        </article>
+        <article class="metric-card">
+          <div class="metric-heading"><span>Contas cadastradas</span><span class="metric-icon blue">≡</span></div>
+          <strong id="metricCount">0</strong>
+          <small>Lançamentos financeiros</small>
+        </article>
+      </section>
+
+      <section class="content-card">
+        <div class="section-head">
+          <div>
+            <h2>Contas e lançamentos</h2>
+            <p>Contas de compras recebidas, receitas e pagamentos registrados.</p>
+          </div>
+          <button class="button button-outline" id="refreshButton" type="button">↻ Atualizar</button>
+        </div>
+
+        <div class="filters">
+          <label class="search-field"><span>⌕</span><input id="searchInput" type="search" placeholder="Buscar descrição ou fornecedor"></label>
+          <label class="filter-field"><span>Tipo</span>
+            <select id="typeFilter">
+              <option value="">Todos</option><option value="DESPESA">Despesas</option><option value="RECEITA">Receitas</option>
+            </select>
+          </label>
+          <label class="filter-field"><span>Situação</span>
+            <select id="statusFilter">
+              <option value="">Todas</option><option value="PENDENTE">Pendente</option><option value="PAGO">Pago</option><option value="CANCELADO">Cancelado</option><option value="VENCIDA">Vencida</option>
+            </select>
+          </label>
+          <label class="filter-field"><span>Fornecedor</span><select id="supplierFilter"><option value="">Todos os fornecedores</option></select></label>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Descrição</th><th>Fornecedor</th><th>Vencimento</th><th>Valor</th><th>Situação</th><th>Ação</th></tr></thead>
+            <tbody id="financeTableBody"><tr><td colspan="6" class="empty-cell">Carregando lançamentos...</td></tr></tbody>
+          </table>
+        </div>
+        <div class="table-footer"><span id="resultsCount">Carregando...</span><span>Valores conforme os lançamentos financeiros do ERP.</span></div>
+      </section>
+    </section>
+
+    <section id="cashflowView" hidden>
+      <section class="content-card">
+        <div class="section-head">
+          <div>
+            <h2>Fluxo de caixa realizado</h2>
+            <p>Entradas e saídas efetivamente registradas no financeiro e no PDV.</p>
+          </div>
+          <button class="button button-outline" id="refreshFlowButton" type="button">↻ Atualizar fluxo</button>
+        </div>
+
+        <div class="flow-filters">
+          <label class="filter-field"><span>Data inicial</span><input id="flowStart" type="date"></label>
+          <label class="filter-field"><span>Data final</span><input id="flowEnd" type="date"></label>
+          <label class="filter-field"><span>Movimentação</span>
+            <select id="flowType">
+              <option value="">Entradas e saídas</option>
+              <option value="ENTRADA">Somente entradas</option>
+              <option value="SAIDA">Somente saídas</option>
+            </select>
+          </label>
+          <label class="filter-field"><span>Origem</span>
+            <select id="flowOrigin">
+              <option value="">Todas as origens</option>
+              <option value="VENDA_PAGAMENTO">Vendas do PDV</option>
+              <option value="LANCAMENTO_FINANCEIRO">Lançamentos financeiros</option>
+              <option value="ESTORNO_VENDA">Estornos de vendas</option>
+            </select>
+          </label>
+          <button class="button button-primary" id="applyFlowFilters" type="button">Aplicar filtros</button>
+        </div>
+        <p id="flowPeriodLabel" class="flow-period-label"></p>
+      </section>
+
+      <section class="metric-grid" aria-label="Resumo do fluxo de caixa">
+        <article class="metric-card">
+          <div class="metric-heading"><span>Total de entradas</span><span class="metric-icon green">↙</span></div>
+          <strong id="flowIn">R$ 0,00</strong><small>Movimentações de entrada no período</small>
+        </article>
+        <article class="metric-card">
+          <div class="metric-heading"><span>Total de saídas</span><span class="metric-icon red">↗</span></div>
+          <strong id="flowOut">R$ 0,00</strong><small>Movimentações de saída no período</small>
+        </article>
+        <article class="metric-card">
+          <div class="metric-heading"><span>Saldo do período</span><span class="metric-icon blue">＝</span></div>
+          <strong id="flowBalance">R$ 0,00</strong><small>Entradas menos saídas</small>
+        </article>
+        <article class="metric-card">
+          <div class="metric-heading"><span>Movimentações</span><span class="metric-icon orange">≡</span></div>
+          <strong id="flowCount">0</strong><small>Registros encontrados</small>
+        </article>
+      </section>
+
+      <section class="content-card">
+        <div class="section-head">
+          <div><h2>Histórico de movimentações</h2><p>Os valores são exibidos uma única vez, conforme a tabela de fluxo de caixa.</p></div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Data e hora</th><th>Descrição</th><th>Origem</th><th>Categoria</th><th>Tipo</th><th>Valor</th></tr></thead>
+            <tbody id="flowTableBody"><tr><td colspan="6" class="empty-cell">Selecione o fluxo de caixa para carregar os registros.</td></tr></tbody>
+          </table>
+        </div>
+        <div class="table-footer"><span id="flowResultsCount">Nenhuma consulta realizada</span><span>Valores realizados; não representam necessariamente o saldo bancário.</span></div>
+      </section>
+    </section>
+
+    <footer class="page-footer">© 2026 River Tech Todos os direitos reservados</footer>
+  </main>
+</div>
+
+<dialog class="payment-dialog" id="paymentDialog">
+  <form id="paymentForm">
+    <div class="dialog-head">
+      <div><p class="eyebrow">CONFIRMAÇÃO FINANCEIRA</p><h2>Registrar pagamento</h2></div>
+      <button class="icon-button" id="closeDialog" type="button" aria-label="Fechar">×</button>
+    </div>
+    <p class="dialog-description">Confirme a data em que o valor foi efetivamente pago. Esta ação altera o status para PAGO.</p>
+    <div class="payment-summary"><span id="paymentDescription">Lançamento</span><strong id="paymentAmount">R$ 0,00</strong></div>
+    <label class="form-label" for="paymentDate">Data do pagamento</label>
+    <input id="paymentDate" name="paymentDate" type="date" required>
+    <input id="paymentId" type="hidden">
+    <div class="dialog-actions">
+      <button class="button button-quiet" id="cancelPayment" type="button">Cancelar</button>
+      <button class="button button-primary" id="confirmPayment" type="submit">Confirmar pagamento</button>
+    </div>
+  </form>
+</dialog>
+</body>
+</html>

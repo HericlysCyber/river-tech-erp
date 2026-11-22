@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Devoluções e Vales | River Tech ERP</title>
+
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/devolucoes.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase.js"></script>
+    <script src="js/devolucoes.js" defer></script>
+<link rel="icon" type="image/png" href="assets/logo.png"></head>
+<body>
+    <main class="dev-page">
+        <header class="dev-header">
+            <div>
+                <span class="dev-eyebrow">GESTÃO DE VENDAS</span>
+                <h1>Devoluções e vales</h1>
+                <p>Registre devoluções e gere créditos para próximas compras.</p>
+            </div>
+            <a class="dev-back" href="dashboard.html">← Voltar ao ERP</a>
+        </header>
+
+        <section class="dev-summary">
+            <article class="dev-card">
+                <span>Empresa</span>
+                <strong id="devEmpresa">Carregando...</strong>
+            </article>
+            <article class="dev-card">
+                <span>Vendas encontradas</span>
+                <strong id="devTotalVendas">—</strong>
+            </article>
+            <article class="dev-card">
+                <span>Crédito gerado nesta sessão</span>
+                <strong id="devCreditoSessao">R$ 0,00</strong>
+            </article>
+        </section>
+
+        <section class="dev-panel">
+            <div class="dev-panel-heading">
+                <div>
+                    <h2>Localizar venda</h2>
+                    <p>Pesquise pelo número da venda ou pelo código identificador.</p>
+                </div>
+                <button id="devAtualizar" class="dev-button dev-button-light" type="button">
+                    Atualizar
+                </button>
+            </div>
+
+            <div class="dev-search">
+                <input id="devBusca" type="search"
+                    placeholder="Número da venda ou ID"
+                    autocomplete="off">
+                <button id="devBuscar" class="dev-button" type="button">
+                    Buscar vendas
+                </button>
+            </div>
+
+            <p id="devStatus" class="dev-status" role="status">
+                Verificando acesso...
+            </p>
+
+            <div class="dev-table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Venda</th>
+                            <th>Data</th>
+                            <th>Total</th>
+                            <th>Status</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody id="devListaVendas">
+                        <tr><td colspan="5">Carregando vendas...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="devAreaVenda" class="dev-panel" hidden>
+            <div class="dev-panel-heading">
+                <div>
+                    <span class="dev-eyebrow">DEVOLUÇÃO</span>
+                    <h2 id="devTituloVenda">Venda selecionada</h2>
+                    <p id="devInfoVenda"></p>
+                </div>
+                <button id="devLimparSelecao" class="dev-button dev-button-light"
+                    type="button">Fechar</button>
+            </div>
+
+            <div class="dev-notice">
+                Informe a quantidade que está sendo devolvida. O sistema deverá
+                respeitar as quantidades já devolvidas anteriormente.
+            </div>
+
+            <thead></thead><p id="devAvisoDevolucao" class="dev-status">
+    Informe a quantidade desta devolução.
+    As quantidades já devolvidas são descontadas automaticamente.
+</p>
+
+            <div class="dev-table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Produto</th>
+                            <th>Comprado</th>
+                            <th>Unitário</th>
+                            <th>Já devolvido</th>
+                            <th>Quantidade agora</th>
+                            <th>Retornar ao estoque?</th>
+                        </tr>
+                    </thead>
+                    <tbody id="devItensVenda"></tbody>
+                </table>
+            </div>
+
+            <div class="dev-form-grid">
+                <label>
+                    Motivo da devolução
+                    <textarea id="devMotivo" rows="3"
+                        placeholder="Informe o motivo da devolução..."></textarea>
+                </label>
+            </div>
+
+            <div class="dev-total">
+                <span>Crédito estimado</span>
+                <strong id="devValorEstimado">R$ 0,00</strong>
+            </div>
+
+            <div class="dev-actions">
+                <button id="devRegistrar" class="dev-button dev-button-danger"
+                    type="button">Registrar devolução e gerar vale</button>
+            </div>
+        </section>
+
+        <section id="devResultado" class="dev-result" hidden>
+            <span class="dev-result-icon">✓</span>
+            <div>
+                <h2>Resultado da operação</h2>
+                <p id="devResultadoTexto"></p>
+                <div class="dev-code-row">
+                    <span>Código do vale</span>
+                    <strong id="devCodigoVale">—</strong>
+                    <button id="devCopiarVale" class="dev-button dev-button-light"
+                        type="button">Copiar código</button>
+                </div>
+                <p id="devSaldoVale"></p>
+            </div>
+        </section>
+
+        <footer class="dev-footer">
+            © 2026 River Tech Todos os direitos reservados
+        </footer>
+    </main>
+</body>
+</html>

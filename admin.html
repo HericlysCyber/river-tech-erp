@@ -1,0 +1,1325 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>River Tech ERP - Administração</title>
+
+    <link
+        rel="stylesheet"
+        href="css/admin.css"
+    >
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="js/supabase.js"></script>
+
+    <script
+        src="js/admin.js?v=20261101-config1"
+        defer
+    ></script>
+
+<link rel="icon" type="image/png" href="assets/logo.png"></head>
+
+<body>
+
+<div class="app">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-brand">
+
+            <div class="brand-mark">
+                <img
+                    src="assets/logo.png"
+                    alt="River Tech"
+                >
+            </div>
+
+            <div>
+
+                <strong>RIVER TECH</strong>
+
+                <span>ERP</span>
+
+            </div>
+
+        </div>
+
+        <div class="sidebar-title">
+            ADMINISTRAÇÃO GERAL
+        </div>
+
+        <nav>
+
+            <button
+                class="menu-item active"
+                data-section="dashboard"
+            >
+                <span>▦</span>
+                Dashboard
+            </button>
+
+            <button
+                class="menu-item"
+                data-section="empresas"
+            >
+                <span>▣</span>
+                Empresas
+            </button>
+
+            <button
+                class="menu-item"
+                data-section="planos"
+            >
+                <span>◆</span>
+                Planos
+            </button>
+
+            <button
+                class="menu-item"
+                data-section="configuracoes"
+            >
+                <span>⚙</span>
+                Configurações
+            </button>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <div class="admin-profile" id="adminProfileButton" role="button" tabindex="0" title="Personalizar perfil">
+
+                <div class="avatar" id="adminAvatar">
+                    A
+                </div>
+
+                <div>
+
+                    <strong id="adminName">
+                        Administrador
+                    </strong>
+
+                    <span>
+                        Administrador Geral
+                    </span>
+
+                </div>
+
+            </div>
+
+            <button
+                id="logoutButton"
+                class="logout"
+            >
+                Sair
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- CONTEÚDO -->
+
+    <main class="content">
+
+        <header class="topbar">
+
+            <div>
+
+                <span class="topbar-label">
+                    RIVER TECH ERP
+                </span>
+
+                <h1 id="pageTitle">
+                    Dashboard
+                </h1>
+
+            </div>
+
+            <div class="topbar-status">
+
+                <span class="status-dot"></span>
+
+                Sistema online
+
+            </div>
+
+        </header>
+
+
+        <!-- DASHBOARD -->
+
+        <section
+            id="section-dashboard"
+            class="page-section active"
+        >
+
+            <div class="welcome">
+
+                <div>
+
+                    <span>
+                        ADMINISTRADOR GERAL
+                    </span>
+
+                    <h2>
+                        Controle completo da plataforma
+                    </h2>
+
+                    <p>
+                        Gerencie empresas, planos, módulos e
+                        limites de utilização do River Tech ERP.
+                    </p>
+
+                </div>
+
+                <button
+                    class="primary-button"
+                    data-open="empresas"
+                >
+                    + Cadastrar empresa
+                </button>
+
+            </div>
+
+
+            <div class="stats-grid">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon blue">
+                        E
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Empresas
+                        </span>
+
+                        <strong id="totalEmpresas">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon orange">
+                        P
+                    </div>
+
+                    <div>
+
+                        <span>
+                            PDVs cadastrados
+                        </span>
+
+                        <strong id="totalPdvs">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon green">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Empresas ativas
+                        </span>
+
+                        <strong id="empresasAtivas">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon red">
+                        !
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Empresas bloqueadas
+                        </span>
+
+                        <strong id="empresasBloqueadas">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-grid">
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <span>
+                                VISÃO GERAL
+                            </span>
+
+                            <h3>
+                                Empresas cadastradas
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+                    <div id="recentCompanies">
+
+                        <div class="empty-state">
+                            Nenhuma empresa cadastrada ainda.
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <span>
+                                ESTRUTURA
+                            </span>
+
+                            <h3>
+                                Controle do ERP
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+                    <div class="structure-list">
+
+                        <div>
+                            <span>Empresas</span>
+                            <strong id="structureEmpresas">0</strong>
+                        </div>
+
+                        <div>
+                            <span>PDVs</span>
+                            <strong id="structurePdvs">0</strong>
+                        </div>
+
+                        <div>
+                            <span>Módulos disponíveis</span>
+                            <strong id="structureModulos">0</strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- EMPRESAS -->
+
+        <section
+            id="section-empresas"
+            class="page-section"
+        >
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span>
+                        GESTÃO
+                    </span>
+
+                    <h2>
+                        Empresas
+                    </h2>
+
+                    <p>
+                        Cadastre e controle os clientes que
+                        utilizarão o River Tech ERP.
+                    </p>
+
+                </div>
+
+                <button
+                    id="newCompanyButton"
+                    class="primary-button"
+                >
+                    + Cadastrar empresa
+                </button>
+
+            </div>
+
+
+            <div class="panel">
+
+                <div class="table-header">
+
+                    <strong>
+                        Empresas cadastradas
+                    </strong>
+
+                    <input
+                        type="search"
+                        id="companySearch"
+                        placeholder="Pesquisar empresa..."
+                    >
+
+                </div>
+
+                <div class="table-wrapper">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Empresa
+                                </th>
+
+                                <th>
+                                    Plano
+                                </th>
+
+                                <th>
+                                    PDVs
+                                </th>
+
+                                <th>
+                                    Status
+                                </th>
+
+                                <th>
+                                    Ações
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="companiesTable">
+
+                            <tr>
+
+                                <td
+                                    colspan="5"
+                                    class="empty-table"
+                                >
+                                    Carregando empresas...
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- PLANOS -->
+
+        <section
+            id="section-planos"
+            class="page-section"
+        >
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span>
+                        CONFIGURAÇÃO COMERCIAL
+                    </span>
+
+                    <h2>
+                        Planos
+                    </h2>
+
+                    <p>
+                        Estrutura de planos e liberações
+                        disponíveis para as empresas.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="plans-grid">
+
+                <div class="plan-card">
+
+                    <span>BÁSICO</span>
+
+                    <h3>
+                        Plano Básico
+                    </h3>
+
+                    <p>
+                        Estrutura essencial para pequenas operações.
+                    </p>
+
+                </div>
+
+                <div class="plan-card featured">
+
+                    <span>PROFISSIONAL</span>
+
+                    <h3>
+                        Plano Profissional
+                    </h3>
+
+                    <p>
+                        Recursos ampliados para empresas em crescimento.
+                    </p>
+
+                </div>
+
+                <div class="plan-card">
+
+                    <span>PREMIUM</span>
+
+                    <h3>
+                        Plano Premium
+                    </h3>
+
+                    <p>
+                        Estrutura completa para operações maiores.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- CONFIGURAÇÕES -->
+
+        <section
+            id="section-configuracoes"
+            class="page-section"
+        >
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span>
+                        SISTEMA
+                    </span>
+
+                    <h2>
+                        Configurações
+                    </h2>
+
+                    <p>
+                        Configurações gerais da plataforma.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="panel admin-config-panel">
+              <h3>Controle por empresa</h3>
+              <p class="configuration-text">Selecione uma empresa para consultar e configurar os módulos autorizados. As alterações são gravadas no Supabase.</p>
+              <div class="admin-config-grid">
+                <label>Empresa<select id="agEmpresaSelect"><option value="">Carregando empresas...</option></select></label>
+                <div id="agEmpresaResumo" class="admin-config-summary">Selecione uma empresa para começar.</div>
+              </div>
+              <div id="agModuloArea" hidden>
+                <h3>Módulos liberados</h3>
+                <p class="configuration-text">Desative um módulo para retirar a autorização administrativa desta empresa. A aplicação das permissões nas páginas e nas operações do banco precisa estar implementada também nos módulos correspondentes.</p>
+                <div class="admin-module-grid">
+                  <label><input type="checkbox" data-modulo="PDV"> PDV</label>
+                  <label><input type="checkbox" data-modulo="PRODUTOS"> Produtos</label>
+                  <label><input type="checkbox" data-modulo="ESTOQUE"> Estoque</label>
+                  <label><input type="checkbox" data-modulo="CLIENTES"> Clientes</label>
+                  <label><input type="checkbox" data-modulo="FINANCEIRO"> Financeiro</label>
+                  <label><input type="checkbox" data-modulo="RELATORIOS"> Relatórios</label>
+                </div>
+                <h3>Contrato e plano</h3>
+                <div class="admin-config-grid">
+                  <label>Plano<select id="agPlano"><option value="BASICO">Básico</option><option value="PROFISSIONAL">Profissional</option><option value="PREMIUM">Premium</option></select></label>
+                  <label>Limite de PDVs<input id="agLimitePdvs" type="number" min="1" max="500" value="1"></label>
+                  <label>Início do contrato<input id="agContratoInicio" type="date"></label>
+                  <label>Fim do contrato<input id="agContratoFim" type="date"></label>
+                </div>
+                <div class="admin-config-actions"><button type="button" class="primary-button" id="agSalvarContrato">Salvar plano e contrato</button><button type="button" class="secondary-button" id="agAlternarBloqueio">Bloquear/desbloquear empresa</button><button type="button" class="secondary-button" id="agRedefinirSenha">Enviar redefinição de senha</button><button type="button" class="primary-button" id="agSalvarModulos">Salvar módulos</button></div>
+                <p id="agConfigStatus" role="status"></p>
+                <h3>PDVs desta empresa</h3><div id="agPdvsLista" class="admin-config-summary">Selecione uma empresa.</div>
+              </div>
+            </div>
+            <style>
+              .admin-config-grid{display:grid;grid-template-columns:minmax(220px,1fr) 2fr;gap:16px;align-items:start;margin:16px 0}.admin-config-grid>label{display:grid;gap:8px;font-weight:700}.admin-config-grid select{padding:12px;border:1px solid #cbd5e1;border-radius:9px;font:inherit}.admin-config-summary{padding:14px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;line-height:1.7;overflow-wrap:anywhere}.admin-module-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:14px 0}.admin-module-grid label{padding:14px;border:1px solid #e2e8f0;border-radius:10px;display:flex;gap:9px;align-items:center;font-weight:700}.admin-config-actions{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0}.admin-config-actions button{cursor:pointer}.admin-config-panel h3{margin-top:20px}.admin-config-panel #agConfigStatus{min-height:20px}@media(max-width:700px){.admin-config-grid{grid-template-columns:1fr}.admin-module-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+            </style>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- MODAL NOVA EMPRESA -->
+
+<div
+    id="companyModal"
+    class="modal-overlay"
+>
+
+    <div class="modal">
+
+        <div class="modal-header">
+
+            <div>
+
+                <span>
+                    NOVO CLIENTE
+                </span>
+
+                <h2>
+                    Cadastrar empresa
+                </h2>
+
+            </div>
+
+            <button
+                type="button"
+                id="closeModal"
+                class="close-modal"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <form id="companyForm">
+
+
+            <!-- =========================================
+                 DADOS DA EMPRESA
+                 ========================================= -->
+
+            <div class="form-section">
+
+                <h3>
+                    Dados da empresa
+                </h3>
+
+                <div class="form-grid">
+
+                    <div class="field full">
+
+                        <label>
+                            Razão social / Nome da empresa *
+                        </label>
+
+                        <input
+                            type="text"
+                            id="companyNome"
+                            placeholder="Nome completo da empresa"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label>
+                            Nome fantasia
+                        </label>
+
+                        <input
+                            type="text"
+                            id="companyFantasia"
+                            placeholder="Nome comercial"
+                        >
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label>
+                            CNPJ / CPF
+                        </label>
+
+                        <input
+                            type="text"
+                            id="companyDocumento"
+                            placeholder="00.000.000/0000-00"
+                        >
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label>
+                            E-mail
+                        </label>
+
+                        <input
+                            type="email"
+                            id="companyEmail"
+                            placeholder="empresa@email.com"
+                        >
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label>
+                            Telefone
+                        </label>
+
+                        <input
+                            type="text"
+                            id="companyTelefone"
+                            placeholder="(00) 00000-0000"
+                        >
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =========================================
+     IDENTIDADE DA EMPRESA
+     ========================================= -->
+
+<div class="form-section">
+
+    <h3>
+        Identidade da empresa
+    </h3>
+
+    <p class="section-help">
+        Adicione a logo que será exibida no painel ERP
+        desta empresa.
+    </p>
+
+    <div class="company-logo-upload">
+
+        <div
+            class="company-logo-preview"
+            id="companyLogoPreview"
+        >
+            <span id="companyLogoPlaceholder">
+                LOGO
+            </span>
+
+            <img
+                id="companyLogoImage"
+                src=""
+                alt="Prévia da logo"
+            >
+        </div>
+
+        <div class="company-logo-controls">
+
+            <label
+                for="companyLogo"
+                class="secondary-button logo-select-button"
+            >
+                Selecionar logo
+            </label>
+
+            <input
+                type="file"
+                id="companyLogo"
+                accept="image/png,image/jpeg,image/webp"
+                hidden
+            >
+
+            <span
+                id="companyLogoName"
+                class="logo-file-name"
+            >
+                Nenhuma imagem selecionada
+            </span>
+
+            <small>
+                PNG, JPG ou WEBP. Recomendado: imagem
+                quadrada ou horizontal com boa resolução.
+            </small>
+
+        </div>
+
+    </div>
+
+</div>
+
+            <!-- =========================================
+                 ENDEREÇO
+                 ========================================= -->
+
+            <div class="form-section">
+
+                <h3>
+                    Endereço
+                </h3>
+
+                <div class="form-grid">
+
+                    <div class="field full">
+
+                        <label>
+                            Endereço
+                        </label>
+
+                        <input
+                            type="text"
+                            id="companyEndereco"
+                            placeholder="Rua, avenida, praça..."
+                        >
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label>
+                            Número
+                        </label>
+
+                        <input
+                            type="text"
+                            id="companyNumero"
+                            placeholder="Número"
+                        >
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label>
+                            Bairro
+                        </label>
+
+                        <input
+                            type="text"
+                            id="companyBairro"
+                            placeholder="Bairro"
+                        >
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label>
+                            Cidade
+                        </label>
+
+                        <input
+                            type="text"
+                            id="companyCidade"
+                            placeholder="Cidade"
+                        >
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label>
+                            Estado
+                        </label>
+
+                        <select id="companyEstado">
+
+                            <option value="">
+                                Selecione
+                            </option>
+
+                            <option value="AC">Acre - AC</option>
+                            <option value="AL">Alagoas - AL</option>
+                            <option value="AP">Amapá - AP</option>
+                            <option value="AM">Amazonas - AM</option>
+                            <option value="BA">Bahia - BA</option>
+                            <option value="CE">Ceará - CE</option>
+                            <option value="DF">Distrito Federal - DF</option>
+                            <option value="ES">Espírito Santo - ES</option>
+                            <option value="GO">Goiás - GO</option>
+                            <option value="MA">Maranhão - MA</option>
+                            <option value="MT">Mato Grosso - MT</option>
+                            <option value="MS">Mato Grosso do Sul - MS</option>
+                            <option value="MG">Minas Gerais - MG</option>
+                            <option value="PA">Pará - PA</option>
+                            <option value="PB">Paraíba - PB</option>
+                            <option value="PR">Paraná - PR</option>
+                            <option value="PE">Pernambuco - PE</option>
+                            <option value="PI">Piauí - PI</option>
+                            <option value="RJ">Rio de Janeiro - RJ</option>
+                            <option value="RN">Rio Grande do Norte - RN</option>
+                            <option value="RS">Rio Grande do Sul - RS</option>
+                            <option value="RO">Rondônia - RO</option>
+                            <option value="RR">Roraima - RR</option>
+                            <option value="SC">Santa Catarina - SC</option>
+                            <option value="SP">São Paulo - SP</option>
+                            <option value="SE">Sergipe - SE</option>
+                            <option value="TO">Tocantins - TO</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label>
+                            CEP
+                        </label>
+
+                        <input
+                            type="text"
+                            id="companyCep"
+                            placeholder="00000-000"
+                        >
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =========================================
+                 CONTRATO
+                 ========================================= -->
+
+            <div class="form-section">
+
+                <h3>
+                    Contrato e plano
+                </h3>
+
+                <div class="form-grid">
+
+                    <div class="field">
+
+                        <label>
+                            Plano
+                        </label>
+
+                        <select id="companyPlano">
+
+                            <option value="BASICO">
+                                Básico
+                            </option>
+
+                            <option value="PROFISSIONAL">
+                                Profissional
+                            </option>
+
+                            <option value="PREMIUM">
+                                Premium
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label>
+                            Quantidade máxima de PDVs *
+                        </label>
+
+                        <input
+                            type="number"
+                            id="companyLimitePdvs"
+                            min="1"
+                            value="1"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label>
+                            Início do contrato
+                        </label>
+
+                        <input
+                            type="date"
+                            id="companyInicio"
+                        >
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label>
+                            Final do contrato
+                        </label>
+
+                        <input
+                            type="date"
+                            id="companyFim"
+                        >
+
+                    </div>
+
+
+                    <div class="field full">
+
+                        <label class="checkbox-line">
+
+                            <input
+                                type="checkbox"
+                                id="companyRenovacao"
+                            >
+
+                            <span>
+                                Renovação automática do contrato
+                            </span>
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =========================================
+     ADMINISTRADOR ERP
+     ========================================= -->
+
+<div class="form-section">
+
+    <h3>
+        Administrador ERP
+    </h3>
+
+    <p class="section-help">
+        Este usuário será responsável pelo acesso e gerenciamento
+        do ERP desta empresa. Os PDVs serão criados posteriormente
+        pelo próprio Administrador ERP.
+    </p>
+
+    <div class="form-grid">
+
+        <div class="field full">
+
+            <label>
+                Nome do administrador *
+            </label>
+
+            <input
+                type="text"
+                id="adminErpNome"
+                placeholder="Nome completo do responsável"
+                required
+            >
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+                E-mail de acesso *
+            </label>
+
+            <input
+                type="email"
+                id="adminErpEmail"
+                placeholder="administrador@empresa.com"
+                required
+            >
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+                Senha inicial *
+            </label>
+
+            <input
+                type="password"
+                id="adminErpSenha"
+                placeholder="Mínimo de 6 caracteres"
+                minlength="6"
+                required
+            >
+
+        </div>
+
+    </div>
+
+    <div class="admin-access-info">
+
+        <span class="admin-access-icon">
+            ✓
+        </span>
+
+        <div>
+
+            <strong>
+                Acesso seguro e exclusivo
+            </strong>
+
+            <p>
+                O administrador terá acesso somente ao ERP
+                da empresa cadastrada. Ele não terá acesso
+                aos dados de outras empresas.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+            <!-- =========================================
+                 MÓDULOS
+                 ========================================= -->
+
+            <div class="form-section">
+
+                <h3>
+                    Módulos liberados
+                </h3>
+
+                <p class="section-help">
+                    Defina quais recursos estarão disponíveis
+                    para este cliente.
+                </p>
+
+                <div class="modules-grid">
+
+                    <label class="module-option">
+
+                        <input
+                            type="checkbox"
+                            value="PDV"
+                            checked
+                        >
+
+                        <span>
+                            PDV
+                        </span>
+
+                    </label>
+
+
+                    <label class="module-option">
+
+                        <input
+                            type="checkbox"
+                            value="PRODUTOS"
+                            checked
+                        >
+
+                        <span>
+                            Produtos
+                        </span>
+
+                    </label>
+
+
+                    <label class="module-option">
+
+                        <input
+                            type="checkbox"
+                            value="ESTOQUE"
+                        >
+
+                        <span>
+                            Estoque
+                        </span>
+
+                    </label>
+
+
+                    <label class="module-option">
+
+                        <input
+                            type="checkbox"
+                            value="CLIENTES"
+                        >
+
+                        <span>
+                            Clientes
+                        </span>
+
+                    </label>
+
+
+                    <label class="module-option">
+
+                        <input
+                            type="checkbox"
+                            value="FINANCEIRO"
+                        >
+
+                        <span>
+                            Financeiro
+                        </span>
+
+                    </label>
+
+
+                    <label class="module-option">
+
+                        <input
+                            type="checkbox"
+                            value="RELATORIOS"
+                        >
+
+                        <span>
+                            Relatórios
+                        </span>
+
+                    </label>
+
+                </div>
+
+            </div>
+
+
+            <!-- =========================================
+                 OBSERVAÇÕES
+                 ========================================= -->
+
+            <div class="form-section">
+
+                <h3>
+                    Observações
+                </h3>
+
+                <div class="field">
+
+                    <textarea
+                        id="companyObservacoes"
+                        rows="4"
+                        placeholder="Informações adicionais sobre o cliente, contrato ou operação..."
+                    ></textarea>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="companyMessage"
+                class="form-message"
+            ></div>
+
+
+            <div class="modal-actions">
+
+                <button
+                    type="button"
+                    id="cancelCompany"
+                    class="secondary-button"
+                >
+                    Cancelar
+                </button>
+
+
+                <button
+                    type="submit"
+                    id="saveCompany"
+                    class="primary-button"
+                >
+                    Cadastrar empresa
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+
+<div id="adminProfileModal" class="admin-profile-modal" hidden>
+  <section class="admin-profile-dialog" role="dialog" aria-modal="true" aria-labelledby="adminProfileTitle">
+    <button type="button" id="adminProfileClose" class="admin-profile-close" aria-label="Fechar">×</button>
+    <h2 id="adminProfileTitle">Perfil do Administrador Geral</h2>
+    <p>Personalize a identificação exibida no canto inferior esquerdo.</p>
+    <form id="adminProfileForm">
+      <label for="adminProfilePhoto">Foto do perfil</label><input id="adminProfilePhoto" type="file" accept="image/png,image/jpeg,.png,.jpg,.jpeg">
+      <img id="adminProfilePhotoPreview" alt="Prévia da foto" hidden>
+      <label for="adminProfileDisplayName">Nome de exibição</label><input id="adminProfileDisplayName" maxlength="100" required>
+      <label for="adminProfilePhone">Telefone</label><input id="adminProfilePhone" maxlength="40">
+      <label for="adminProfileEmail">E-mail de contato</label><input id="adminProfileEmail" type="email" maxlength="160">
+      <div class="admin-profile-actions"><button type="button" id="adminProfileCancel">Cancelar</button><button type="submit">Salvar perfil</button></div><small id="adminProfileStatus" role="status"></small>
+    </form>
+  </section>
+</div>
+<style>
+.admin-profile{cursor:pointer}.admin-profile-modal[hidden]{display:none}.admin-profile-modal{position:fixed;inset:0;background:#08172dcc;z-index:1000;display:flex;align-items:center;justify-content:center;padding:18px}.admin-profile-dialog{background:#fff;color:#172033;border-radius:16px;width:min(460px,100%);padding:26px;position:relative;box-shadow:0 24px 80px #0003}.admin-profile-dialog h2{margin:0 0 6px}.admin-profile-dialog>p{color:#718096;font-size:13px;margin-bottom:18px}.admin-profile-close{position:absolute;right:14px;top:12px;border:0;background:transparent;font-size:25px;cursor:pointer}.admin-profile-dialog form{display:grid;gap:8px}.admin-profile-dialog label{font-size:12px;font-weight:700;margin-top:5px}.admin-profile-dialog input{width:100%;padding:10px;border:1px solid #d7dee8;border-radius:8px}.admin-profile-dialog #adminProfilePhotoPreview{width:74px;height:74px;border-radius:50%;object-fit:cover}.admin-profile-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:12px}.admin-profile-actions button{padding:10px 14px;border:0;border-radius:8px;background:#1266d6;color:#fff;font-weight:700;cursor:pointer}.admin-profile-actions button:first-child{background:#e8edf4;color:#172033}.avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+</style>
+
+</body>
+</html>

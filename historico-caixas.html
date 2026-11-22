@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Histórico de Caixas | River Tech ERP</title>
+
+    <link rel="stylesheet" href="css/historicos.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase.js"></script>
+    <script src="js/historico-caixas.js" defer></script>
+<link rel="icon" type="image/png" href="assets/logo.png"></head>
+
+<body>
+<div class="history-layout">
+
+    <header class="history-topbar">
+        <a href="dashboard.html" class="brand">
+            <img src="assets/logo.png" alt="River Tech">
+            <span>
+                <strong>RIVER TECH</strong>
+                <small>ERP EMPRESARIAL</small>
+            </span>
+        </a>
+
+        <div class="topbar-actions">
+            <span class="company-pill" id="nomeEmpresa">
+                Carregando empresa...
+            </span>
+
+            <button class="btn btn-light" id="btnVoltar">
+                Voltar ao ERP
+            </button>
+        </div>
+    </header>
+
+    <main class="history-main">
+
+        <section class="page-heading">
+            <div>
+                <span class="eyebrow">GESTÃO FINANCEIRA</span>
+                <h1>Histórico de Caixas</h1>
+                <p>
+                    Consulte aberturas, fechamentos, valores recebidos
+                    e diferenças de caixa da sua empresa.
+                </p>
+                <p id="nomeUsuario" style="margin-top:8px"></p>
+            </div>
+
+            <button class="btn btn-primary" id="btnAtualizar">
+                Atualizar histórico
+            </button>
+        </section>
+
+        <section class="metric-grid">
+
+            <article class="metric-card">
+                <span>Total de caixas</span>
+                <strong id="totalCaixas">0</strong>
+                <small>No período selecionado</small>
+            </article>
+
+            <article class="metric-card">
+                <span>Caixas abertos</span>
+                <strong id="caixasAbertos">0</strong>
+                <small>Aguardando fechamento</small>
+            </article>
+
+            <article class="metric-card">
+                <span>Caixas fechados</span>
+                <strong id="caixasFechados">0</strong>
+                <small>Fechamentos realizados</small>
+            </article>
+
+            <article class="metric-card">
+                <span>Diferenças de caixa</span>
+                <strong id="totalDiferencas">R$ 0,00</strong>
+                <small>Soma absoluta das diferenças registradas</small>
+            </article>
+
+        </section>
+
+        <section class="panel">
+
+            <div class="panel-heading">
+                <div>
+                    <span class="eyebrow">CONSULTA</span>
+                    <h2>Caixas da empresa</h2>
+                </div>
+
+                <span class="result-count" id="contagemResultados">
+                    0 registros
+                </span>
+            </div>
+
+            <div class="filters">
+
+                <label>
+                    Data inicial
+                    <input type="date" id="dataInicio">
+                </label>
+
+                <label>
+                    Data final
+                    <input type="date" id="dataFim">
+                </label>
+
+                <label>
+                    PDV
+                    <select id="filtroPdv">
+                        <option value="">Todos os PDVs</option>
+                    </select>
+                </label>
+
+                <label>
+                    Situação
+                    <select id="filtroStatus">
+                        <option value="">Todas</option>
+                        <option value="aberto">Aberto</option>
+                        <option value="fechado">Fechado</option>
+                    </select>
+                </label>
+
+                <label class="search-field">
+                    Pesquisar
+                    <input
+                        type="search"
+                        id="pesquisa"
+                        placeholder="Caixa, PDV, operador ou observação"
+                    >
+                </label>
+
+                <button class="btn btn-primary" id="btnFiltrar">
+                    Filtrar
+                </button>
+
+            </div>
+
+            <div id="mensagem" class="table-message">
+                Carregando histórico de caixas...
+            </div>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Caixa</th>
+                            <th>PDV</th>
+                            <th>Operador</th>
+                            <th>Abertura</th>
+                            <th>Fechamento</th>
+                            <th>Valor inicial</th>
+                            <th>Vendas</th>
+                            <th>Diferença</th>
+                            <th>Status</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="listaCaixas">
+                        <tr>
+                            <td colspan="10" class="table-message">
+                                Carregando...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="table-footer">
+                Os valores apresentados correspondem aos totais registrados
+                em cada caixa. Diferenças são calculadas no fechamento.
+            </div>
+
+        </section>
+
+        <footer class="page-footer">
+            <span>© 2026 River Tech Todos os direitos reservados</span>
+            <span>Histórico de Caixas</span>
+        </footer>
+
+    </main>
+</div>
+
+<div class="modal-backdrop" id="modalCaixa" aria-hidden="true">
+    <section class="detail-modal">
+
+        <div class="modal-heading">
+            <div>
+                <span class="eyebrow">CONFERÊNCIA FINANCEIRA</span>
+                <h2 id="detalheTitulo">Detalhes do caixa</h2>
+            </div>
+
+            <button
+                type="button"
+                class="icon-button"
+                id="btnFecharModal"
+                aria-label="Fechar"
+            >×</button>
+        </div>
+
+        <div class="cash-detail-grid" id="detalhesCaixa"></div>
+
+        <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:22px">
+
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+
+        <button class="btn btn-primary" id="btnReimprimirRelatorio" type="button">
+            Reimprimir relatório
+        </button>
+
+        <button class="btn btn-light" id="btnSalvarPDF" type="button">
+            Salvar PDF
+        </button>
+
+    </div>
+
+    <button class="btn btn-light" id="btnFecharDetalhes" type="button">
+        Fechar
+    </button>
+
+</div>
+
+    </section>
+</div>
+
+</body>
+</html>

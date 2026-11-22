@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compras | River Tech ERP</title>
+
+    <link rel="stylesheet" href="css/compras.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase.js"></script>
+    <script src="js/compras.js" defer></script>
+<link rel="icon" type="image/png" href="assets/logo.png"></head>
+<body>
+    <main class="page">
+        <header class="topbar">
+            <div class="brand">
+                <img src="assets/logo.png" alt="River Tech">
+                <div>
+                    <span>RIVER TECH ERP</span>
+                    <h1>Compras</h1>
+                    <p id="empresaNome">Carregando empresa...</p>
+                </div>
+            </div>
+
+            <button type="button" class="btn btn-secondary" id="voltarButton">
+                ← Voltar ao ERP
+            </button>
+        </header>
+
+        <section class="intro">
+            <div>
+                <span class="eyebrow">GESTÃO DE ESTOQUE</span>
+                <h2>Compras e recebimento</h2>
+                <p>Registre as compras e controle a entrada de mercadorias.</p>
+            </div>
+
+            <button type="button" class="btn btn-primary" id="novaCompraButton">
+                + Nova compra
+            </button>
+        </section>
+
+        <section class="stats">
+            <article class="stat">
+                <span>Rascunhos</span>
+                <strong id="statRascunhos">0</strong>
+            </article>
+            <article class="stat">
+                <span>Recebidas</span>
+                <strong id="statRecebidas">0</strong>
+            </article>
+            <article class="stat">
+                <span>Total recebido</span>
+                <strong id="statTotalRecebido">R$ 0,00</strong>
+            </article>
+        </section>
+
+        <section class="panel" id="formPanel" hidden>
+            <div class="panel-heading">
+                <div>
+                    <span class="eyebrow">LANÇAMENTO</span>
+                    <h2 id="formTitulo">Nova compra</h2>
+                    <p>Informe os dados e adicione os produtos recebidos do fornecedor.</p>
+                </div>
+                <span class="status status-draft">Rascunho</span>
+            </div>
+
+            <section class="xml-import-card" aria-labelledby="xmlImportTitulo">
+                <div>
+                    <span class="eyebrow">IMPORTAÇÃO ASSISTIDA</span>
+                    <h3 id="xmlImportTitulo">Importar nota fiscal (NF-e XML)</h3>
+                    <p>Selecione o XML recebido do fornecedor. A importação apenas preenche o rascunho; o estoque só muda após confirmar o recebimento.</p>
+                </div>
+                <div class="xml-import-controls">
+                    <label for="arquivoNfeXml">Arquivo XML da NF-e</label>
+                    <input id="arquivoNfeXml" type="file" accept=".xml,text/xml,application/xml">
+                    <button type="button" class="btn btn-secondary" id="importarNfeXmlButton">Ler XML e preencher compra</button>
+                </div>
+                <div id="mensagemXml" class="message" hidden aria-live="polite"></div>
+                <div id="resumoXml" class="xml-import-summary" hidden></div>
+            </section>
+
+            <form id="compraForm">
+                <div class="form-grid">
+                    <label>
+                        Fornecedor *
+                        <select id="fornecedorId" required>
+                            <option value="">Selecione um fornecedor</option>
+                        </select>
+                    </label>
+
+                    <label>
+                        Número da nota/documento
+                        <input id="numeroDocumento" maxlength="100"
+                            placeholder="Ex.: NF 000123">
+                    </label>
+
+                    <label>
+                        Data da compra *
+                        <input id="dataCompra" type="date" required>
+                    </label>
+
+                    <label class="full">
+                        Observações
+                        <textarea id="observacao" rows="2"
+                            maxlength="2000"></textarea>
+                    </label>
+                </div>
+
+                <div class="items-heading">
+                    <div>
+                        <h3>Produtos da compra</h3>
+                        <p>Os produtos devem estar cadastrados no ERP.</p>
+                    </div>
+                    <button type="button" class="btn btn-secondary" id="adicionarItemButton">
+                        + Adicionar produto
+                    </button>
+                </div>
+
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Produto</th>
+                                <th>Quantidade</th>
+                                <th>Custo unitário (R$)</th>
+                                <th>Subtotal (R$)</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="itensBody"></tbody>
+                    </table>
+                </div>
+
+                <p class="empty-items" id="emptyItems">
+                    Adicione pelo menos um produto para continuar.
+                </p>
+
+                <div class="totals-grid">
+                    <label>
+                        Frete (R$)
+                        <input id="frete" type="number" min="0" step="0.01" value="0">
+                    </label>
+
+                    <label>
+                        Desconto (R$)
+                        <input id="desconto" type="number" min="0" step="0.01" value="0">
+                    </label>
+
+                    <div class="total-box">
+                        <span>Subtotal dos produtos</span>
+                        <strong id="subtotalProdutos">R$ 0,00</strong>
+                        <span>Total da compra</span>
+                        <strong class="grand-total" id="totalCompra">R$ 0,00</strong>
+                    </div>
+                </div>
+
+                <div id="mensagemForm" class="message" hidden></div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelarEdicaoButton">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="btn btn-primary" id="salvarCompraButton">
+                        Salvar rascunho
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <section class="panel">
+            <div class="list-heading">
+                <div>
+                    <span class="eyebrow">CONTROLE</span>
+                    <h2>Histórico de compras</h2>
+                </div>
+
+                <div class="filters">
+                    <input id="pesquisa" placeholder="Pesquisar fornecedor ou documento">
+                    <select id="filtroStatus">
+                        <option value="">Todos os status</option>
+                        <option value="RASCUNHO">Rascunhos</option>
+                        <option value="RECEBIDA">Recebidas</option>
+                        <option value="CANCELADA">Canceladas</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="mensagemLista" class="message" hidden></div>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Data</th>
+                            <th>Documento</th>
+                            <th>Fornecedor</th>
+                            <th>Total</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="listaCompras">
+                        <tr><td colspan="6">Carregando compras...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <footer>© 2026 River Tech Todos os direitos reservados</footer>
+    </main>
+</body>
+</html>
